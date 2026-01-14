@@ -1,27 +1,78 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>فرقة عبدالرحمن بن القاسم الكشفية | Abdulrahman bin Al-Qasim Scout Group</title>
-    <meta name="description" content="فرقة عبدالرحمن بن القاسم الكشفية - نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية" />
+    <meta name="description"
+        content="فرقة عبدالرحمن بن القاسم الكشفية - نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية" />
     <meta name="author" content="Abdulrahman bin Al-Qasim Scout Group" />
+    <meta name="keywords" content="كشافة, فرقة كشفية, عبدالرحمن بن القاسم, scouts, Saudi Arabia" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="فرقة عبدالرحمن بن القاسم الكشفية" />
+    <meta property="og:description" content="نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية" />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Header Controls (on Hero) -->
-    <header class="header">
-        <div class="header-controls">
-            <button class="lang-toggle" id="langToggle">
-                <span class="lang-icon"><i class="fas fa-language"></i></span>
-                <span class="lang-text" data-ar="EN" data-en="عربي">EN</span>
-            </button>
-            <a href="admin.html" class="admin-link" title="Admin Panel" style="padding: 10px 15px; border: 2px solid white; border-radius: 8px; font-size: 12px; color: white; transition: all 0.3s; text-decoration: none; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); font-weight: 600;">⚙️</a>
+    <!-- Header with Mobile Navigation -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <!-- Mobile Menu Toggle -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+
+                <!-- Header Controls -->
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-sun" id="themeIconLight"></i>
+                        <i class="fas fa-moon hidden" id="themeIconDark"></i>
+                    </button>
+                    <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                        <span class="lang-icon"><i class="fas fa-language"></i></span>
+                        <span class="lang-text" data-ar="EN" data-en="عربي">EN</span>
+                    </button>
+                    <a href="admin.html" class="admin-link" title="Admin Panel" aria-label="Admin Panel">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                </div>
+            </div>
         </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+        <!-- Mobile Navigation -->
+        <nav class="nav-mobile" id="mobileMenu" aria-label="Mobile navigation">
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="mobile-nav-list">
+                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#achievements" data-ar="الإنجازات" data-en="Achievements">الإنجازات</a></li>
+                <li><a href="#participation" data-ar="المشاركات" data-en="Participation">المشاركات</a></li>
+                <li><a href="#about" data-ar="عن الفرقة" data-en="About">عن الفرقة</a></li>
+                <li><a href="#leader" data-ar="القائد" data-en="Leader">القائد</a></li>
+                <li><a href="#videos" data-ar="الفيديوهات" data-en="Videos">الفيديوهات</a></li>
+                <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
@@ -30,86 +81,66 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-emblem">
-                    <img src="scout-team-logo-AtpW4kh9.png" alt="Scout Emblem">
+                    <img src="scout-team-logo-AtpW4kh9.png" alt="Scout Emblem" loading="eager">
                 </div>
-                <h1 class="hero-title" data-ar="فرقة عبدالرحمن بن القاسم الكشفية" data-en="Abdulrahman bin Al-Qasim Scout Group">فرقة عبدالرحمن بن القاسم الكشفية</h1>
-                <p class="hero-subtitle" data-ar="نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية من خلال برامج كشفية متميزة" data-en="We aim to develop youth and promote values of leadership and community responsibility through outstanding scout programs">نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية</p>
+                <h1 class="hero-title" data-ar="فرقة عبدالرحمن بن القاسم الكشفية"
+                    data-en="Abdulrahman bin Al-Qasim Scout Group">فرقة عبدالرحمن بن القاسم الكشفية</h1>
+                <p class="hero-subtitle"
+                    data-ar="نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية من خلال برامج كشفية متميزة"
+                    data-en="We aim to develop youth and promote values of leadership and community responsibility through outstanding scout programs">
+                    نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية</p>
                 <div class="hero-buttons">
-                    <a href="#achievements" class="btn btn-primary" data-ar="استكشف المزيد" data-en="Explore More">استكشف المزيد</a>
-                    <a href="#contact" class="btn btn-secondary" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</a>
+                    <a href="#achievements" class="btn btn-primary" data-ar="استكشف المزيد"
+                        data-en="Explore More">استكشف المزيد</a>
+                    <a href="#contact" class="btn btn-secondary" data-ar="تواصل معنا" data-en="Contact Us">تواصل
+                        معنا</a>
                 </div>
             </div>
         </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polyline points="12 5 12 19 M5 12 L12 19 L19 12"></polyline>
+            </svg>
+        </div>
     </section>
 
-    <!-- Achievements Section -->
+    <!-- Achievements Section - Dynamic via JS -->
     <section id="achievements" class="section achievements-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-ar="الإنجازات" data-en="Achievements">الإنجازات</h2>
-                <p class="section-subtitle" data-ar="رحلة من النجاح والتميز" data-en="A journey of success and excellence">رحلة من النجاح والتميز</p>
+                <p class="section-subtitle" data-ar="رحلة من النجاح والتميز"
+                    data-en="A journey of success and excellence">رحلة من النجاح والتميز</p>
             </div>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-year">2024</div>
-                    <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
-                    <h3 class="achievement-title" data-ar="جائزة التميز الكشفي" data-en="Scout Excellence Award">جائزة التميز الكشفي</h3>
-                    <p class="achievement-desc" data-ar="حصلت الفرقة على جائزة التميز الكشفي على مستوى المملكة" data-en="The group received the Scout Excellence Award at the national level">حصلت الفرقة على جائزة التميز الكشفي</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-year">2023</div>
-                    <div class="achievement-icon"><i class="fas fa-medal"></i></div>
-                    <h3 class="achievement-title" data-ar="المركز الأول في المسابقات" data-en="First Place in Competitions">المركز الأول في المسابقات</h3>
-                    <p class="achievement-desc" data-ar="تحقيق المركز الأول في المسابقات الكشفية الإقليمية" data-en="Achieved first place in regional scout competitions">تحقيق المركز الأول في المسابقات</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-year">2022</div>
-                    <div class="achievement-icon"><i class="fas fa-award"></i></div>
-                    <h3 class="achievement-title" data-ar="شهادة التميز المجتمعي" data-en="Community Excellence">شهادة التميز المجتمعي</h3>
-                    <p class="achievement-desc" data-ar="تكريم الفرقة لدورها البارز في خدمة المجتمع" data-en="Recognition for outstanding community service">تكريم الفرقة لدورها البارز</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-year">2021</div>
-                    <div class="achievement-icon"><i class="fas fa-star"></i></div>
-                    <h3 class="achievement-title" data-ar="جائزة القيادة الشبابية" data-en="Youth Leadership Award">جائزة القيادة الشبابية</h3>
-                    <p class="achievement-desc" data-ar="تكريم قائد الفرقة لجهوده في تطوير الشباب" data-en="Leader honored for youth development efforts">تكريم قائد الفرقة</p>
-                </div>
+            <!-- Dynamic content container -->
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Cards will be rendered by JavaScript -->
+            </div>
+            <div class="empty-state hidden" id="achievementsEmpty">
+                <i class="fas fa-trophy"></i>
+                <p data-ar="لا توجد إنجازات بعد" data-en="No achievements yet">لا توجد إنجازات بعد</p>
             </div>
         </div>
     </section>
 
-    <!-- Participation Section -->
+    <!-- Participation Section - Dynamic via JS -->
     <section id="participation" class="section participation-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-ar="المشاركات والفعاليات" data-en="Participation & Events">المشاركات والفعاليات</h2>
-                <p class="section-subtitle" data-ar="مساهمتنا في المجتمع" data-en="Our community contribution">مساهمتنا في المجتمع</p>
+                <h2 class="section-title" data-ar="المشاركات والفعاليات" data-en="Participation & Events">المشاركات
+                    والفعاليات</h2>
+                <p class="section-subtitle" data-ar="مساهمتنا في المجتمع" data-en="Our community contribution">مساهمتنا
+                    في المجتمع</p>
             </div>
-            <div class="participation-grid">
-                <div class="participation-card">
-                    <div class="card-icon"><i class="fas fa-heart"></i></div>
-                    <h3 class="card-title" data-ar="حملة التبرع بالدم" data-en="Blood Donation">حملة التبرع بالدم</h3>
-                    <p class="card-desc" data-ar="تنظيم حملات دورية للتبرع بالدم" data-en="Organizing regular blood donation campaigns">تنظيم حملات دورية للتبرع</p>
-                    <div class="card-stats" data-ar="+500 متبرع" data-en="500+ Donors">+500 متبرع</div>
-                </div>
-                <div class="participation-card">
-                    <div class="card-icon"><i class="fas fa-users"></i></div>
-                    <h3 class="card-title" data-ar="خدمة الحجاج" data-en="Pilgrims Service">خدمة الحجاج والمعتمرين</h3>
-                    <p class="card-desc" data-ar="المشاركة في خدمة ضيوف الرحمن" data-en="Serving pilgrims and visitors">المشاركة في خدمة الحجاج</p>
-                    <div class="card-stats" data-ar="3 مواسم" data-en="3 Seasons">3 مواسم</div>
-                </div>
-                <div class="participation-card">
-                    <div class="card-icon"><i class="fas fa-tree"></i></div>
-                    <h3 class="card-title" data-ar="حملة التشجير" data-en="Tree Planting">حملة التشجير</h3>
-                    <p class="card-desc" data-ar="غرس الأشجار والمحافظة على البيئة" data-en="Planting trees and environmental conservation">غرس الأشجار والحفاظ</p>
-                    <div class="card-stats" data-ar="+1000 شجرة" data-en="1000+ Trees">+1000 شجرة</div>
-                </div>
-                <div class="participation-card">
-                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
-                    <h3 class="card-title" data-ar="مساعدة المحتاجين" data-en="Helping Others">مساعدة المحتاجين</h3>
-                    <p class="card-desc" data-ar="توزيع المساعدات على الأسر المحتاجة" data-en="Distributing aid to families">توزيع المساعدات</p>
-                    <div class="card-stats" data-ar="+200 أسرة" data-en="200+ Families">+200 أسرة</div>
-                </div>
+            <!-- Dynamic content container -->
+            <div class="participation-grid" id="participationGrid">
+                <!-- Cards will be rendered by JavaScript -->
+            </div>
+            <div class="empty-state hidden" id="participationEmpty">
+                <i class="fas fa-handshake"></i>
+                <p data-ar="لا توجد مشاركات بعد" data-en="No participation yet">لا توجد مشاركات بعد</p>
             </div>
         </div>
     </section>
@@ -119,32 +150,41 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-ar="عن الفرقة" data-en="About">عن الفرقة</h2>
-                <p class="section-subtitle" data-ar="معلومات عن فرقتنا" data-en="Information about our group">معلومات عن فرقتنا</p>
+                <p class="section-subtitle" data-ar="معلومات عن فرقتنا" data-en="Information about our group">معلومات عن
+                    فرقتنا</p>
             </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="about-card">
-                        <div class="card-header"><i class="fas fa-bullseye"></i></div>
-                        <h3 class="card-title" data-ar="الرسالة" data-en="Mission">الرسالة</h3>
-                        <p class="card-desc" data-ar="تطوير الشباب من خلال برامج كشفية متميزة وتعزيز قيم القيادة والمسؤولية المجتمعية" data-en="Developing youth through outstanding scout programs and promoting leadership values">تطوير الشباب من خلال برامج متميزة</p>
+            <div class="about-bento">
+                <!-- Stats Row -->
+                <div class="bento-stats-row">
+                    <div class="bento-stat-card">
+                        <div class="stat-value" id="memberCountValue" data-stat="members">150+</div>
+                        <div class="stat-label" data-ar="الأعضاء" data-en="Members">الأعضاء</div>
                     </div>
-                    <div class="about-card">
-                        <div class="card-header"><i class="fas fa-heart"></i></div>
-                        <h3 class="card-title" data-ar="القيم" data-en="Values">القيم</h3>
-                        <p class="card-desc" data-ar="الشرف والأمانة والشجاعة والتعاون والعطاء والمسؤولية" data-en="Honor, integrity, courage, cooperation, and community responsibility">الشرف والأمانة والشجاعة والتعاون</p>
+                    <div class="bento-emblem">
+                        <span class="emblem-icon">⚜️</span>
+                    </div>
+                    <div class="bento-stat-card">
+                        <div class="stat-value" id="establishedYearValue" data-stat="year">2015</div>
+                        <div class="stat-label" data-ar="تأسست" data-en="Established">تأسست</div>
                     </div>
                 </div>
-                <div class="about-stats">
-                    <div class="emblem-circle">⚜️</div>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">150+</div>
-                            <div class="stat-label" data-ar="الأعضاء" data-en="Members">الأعضاء</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">2015</div>
-                            <div class="stat-label" data-ar="تأسست" data-en="Established">تأسست</div>
-                        </div>
+                <!-- Content Cards Row -->
+                <div class="bento-content-row">
+                    <div class="bento-card mission-card">
+                        <div class="bento-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3 class="bento-title" data-ar="الرسالة" data-en="Mission">الرسالة</h3>
+                        <p class="bento-desc" id="missionText" data-mission
+                            data-ar="تطوير الشباب من خلال برامج كشفية متميزة وتعزيز قيم القيادة والمسؤولية المجتمعية"
+                            data-en="Developing youth through outstanding scout programs and promoting leadership values">
+                            تطوير الشباب من خلال برامج متميزة</p>
+                    </div>
+                    <div class="bento-card values-card">
+                        <div class="bento-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="bento-title" data-ar="القيم" data-en="Values">القيم</h3>
+                        <p class="bento-desc" id="valuesText" data-values
+                            data-ar="الشرف والأمانة والشجاعة والتعاون والعطاء والمسؤولية"
+                            data-en="Honor, integrity, courage, cooperation, and community responsibility">الشرف
+                            والأمانة والشجاعة والتعاون</p>
                     </div>
                 </div>
             </div>
@@ -156,13 +196,16 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-ar="القائد" data-en="Leader">القائد</h2>
-                <p class="section-subtitle" data-ar="قائد الفرقة الكشفي" data-en="Scout Group Leader">قائد الفرقة الكشفي</p>
+                <p class="section-subtitle" data-ar="قائد الفرقة الكشفي" data-en="Scout Group Leader">قائد الفرقة الكشفي
+                </p>
             </div>
             <div class="leader-grid">
                 <div class="leader-image">
-                    <div class="leader-avatar"><img src="scouts leader.jpg"></div>
-                    <div class="leader-info" data-ar="القائد الكشفي" data-en="Scout Leader">
-                        <h3>القائد الكشفي</h3>
+                    <div class="leader-avatar">
+                        <img src="scouts leader.jpg" alt="Scout Leader" loading="lazy">
+                    </div>
+                    <div class="leader-info">
+                        <h3 data-ar="القائد الكشفي" data-en="Scout Leader">القائد الكشفي</h3>
                         <p data-ar="فرقة عبدالرحمن بن القاسم" data-en="Abdulrahman Group">فرقة عبدالرحمن بن القاسم</p>
                     </div>
                 </div>
@@ -170,48 +213,43 @@
                     <div class="detail-card">
                         <div class="detail-icon"><i class="fas fa-briefcase"></i></div>
                         <h4 data-ar="الخبرة" data-en="Experience">الخبرة</h4>
-                        <p data-ar="+15 سنة" data-en="15+ Years">+15 سنة من القيادة الكشفية والتطوير</p>
+                        <p id="leaderExperience" data-experience data-ar="+15 سنة من القيادة الكشفية والتطوير"
+                            data-en="15+ Years of scout leadership and development">+15 سنة من القيادة الكشفية والتطوير
+                        </p>
                     </div>
                     <div class="detail-card">
                         <div class="detail-icon"><i class="fas fa-trophy"></i></div>
                         <h4 data-ar="الإنجازات" data-en="Achievements">الإنجازات</h4>
-                        <p>
-                            <strong data-ar="قائد كشفي معتمد" data-en="Certified Scout Leader">قائد كشفي معتمد</strong><br>
-                            <strong data-ar="مدرب في القيادة الشبابية" data-en="Youth Leadership Trainer">مدرب في القيادة الشبابية</strong><br>
-                            <strong data-ar="عضو الجمعية الكشفية السعودية" data-en="Member of Saudi Scout Association">عضو الجمعية الكشفية</strong>
-                        </p>
+                        <div id="leaderAchievements">
+                            <p>
+                                <strong data-ar="قائد كشفي معتمد" data-en="Certified Scout Leader">قائد كشفي
+                                    معتمد</strong><br>
+                                <strong data-ar="مدرب في القيادة الشبابية" data-en="Youth Leadership Trainer">مدرب في
+                                    القيادة الشبابية</strong><br>
+                                <strong data-ar="عضو الجمعية الكشفية السعودية"
+                                    data-en="Member of Saudi Scout Association">عضو الجمعية الكشفية</strong>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Videos Section -->
+    <!-- Videos Section - Dynamic via JS -->
     <section id="videos" class="section videos-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-ar="الفيديوهات" data-en="Videos">الفيديوهات</h2>
                 <p class="section-subtitle" data-ar="شاهد أنشطتنا" data-en="Watch our activities">شاهد أنشطتنا</p>
             </div>
-            <div class="videos-grid">
-                <div class="video-card">
-                    <div class="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=340&fit=crop')">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="play-btn"><i class="fas fa-play"></i></a>
-                    </div>
-                    <h3 class="video-title" data-ar="المخيم الكشفي السنوي" data-en="Annual Scout Camp">المخيم الكشفي السنوي</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=340&fit=crop')">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="play-btn"><i class="fas fa-play"></i></a>
-                    </div>
-                    <h3 class="video-title" data-ar="فعاليات اليوم الوطني" data-en="National Day Events">فعاليات اليوم الوطني</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=340&fit=crop')">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="play-btn"><i class="fas fa-play"></i></a>
-                    </div>
-                    <h3 class="video-title" data-ar="رحلة الكشافة البيئية" data-en="Environmental Trip">رحلة الكشافة البيئية</h3>
-                </div>
+            <!-- Dynamic content container -->
+            <div class="videos-grid" id="videosGrid">
+                <!-- Cards will be rendered by JavaScript -->
+            </div>
+            <div class="empty-state hidden" id="videosEmpty">
+                <i class="fas fa-video"></i>
+                <p data-ar="لا توجد فيديوهات بعد" data-en="No videos yet">لا توجد فيديوهات بعد</p>
             </div>
         </div>
     </section>
@@ -221,7 +259,8 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h2>
-                <p class="section-subtitle" data-ar="نحن هنا لسماع آرائك" data-en="We're here to hear from you">نحن هنا لسماع آرائك</p>
+                <p class="section-subtitle" data-ar="نحن هنا لسماع آرائك" data-en="We're here to hear from you">نحن هنا
+                    لسماع آرائك</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
@@ -230,35 +269,46 @@
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <div>
                             <p class="contact-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</p>
-                            <a href="mailto:scout@example.com">scout@example.com</a>
+                            <a href="mailto:scout@example.com" id="contactEmail"
+                                data-contact="email">scout@example.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon"><i class="fas fa-phone"></i></span>
                         <div>
                             <p class="contact-label" data-ar="الهاتف" data-en="Phone">الهاتف</p>
-                            <a href="tel:+966XXXXXXXXX">+966 XX XXX XXXX</a>
+                            <a href="tel:+966XXXXXXXXX" id="contactPhone" data-contact="phone">+966 XX XXX XXXX</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
                         <div>
                             <p class="contact-label" data-ar="الموقع" data-en="Address">الموقع</p>
-                            <p data-ar="المملكة العربية السعودية" data-en="Saudi Arabia">المملكة العربية السعودية</p>
+                            <p id="contactAddress" data-contact="address" data-ar="المملكة العربية السعودية"
+                                data-en="Saudi Arabia">المملكة العربية السعودية</p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
-                        <input type="text" id="name" placeholder="الاسم / Name" required>
+                        <input type="text" id="formName" name="name" data-ar="الاسم" data-en="Name"
+                            placeholder="الاسم / Name" required aria-required="true">
+                        <span class="error-message" id="nameError"></span>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" placeholder="البريد الإلكتروني / Email" required>
+                        <input type="email" id="formEmail" name="email" data-ar="البريد الإلكتروني" data-en="Email"
+                            placeholder="البريد الإلكتروني / Email" required aria-required="true">
+                        <span class="error-message" id="emailError"></span>
                     </div>
                     <div class="form-group">
-                        <textarea id="message" placeholder="الرسالة / Message" rows="5" required></textarea>
+                        <textarea id="formMessage" name="message" data-ar="الرسالة" data-en="Message"
+                            placeholder="الرسالة / Message" rows="5" required aria-required="true"></textarea>
+                        <span class="error-message" id="messageError"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-ar="إرسال" data-en="Send">إرسال</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" data-ar="إرسال" data-en="Send">
+                        <span class="btn-text">إرسال</span>
+                        <span class="btn-loading hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -270,66 +320,25 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <div class="footer-emblem">⚜️</div>
-                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية" data-en="Abdulrahman Scout Group">فرقة عبدالرحمن بن القاسم الكشفية</span>
+                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية" data-en="Abdulrahman Scout Group">فرقة عبدالرحمن بن
+                        القاسم الكشفية</span>
                 </div>
                 <p class="footer-copy">
-                    <span id="year"></span> 
-                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية. جميع الحقوق محفوظة" data-en="Abdulrahman Scout Group. All rights reserved">فرقة عبدالرحمن بن القاسم الكشفية. جميع الحقوق محفوظة</span>
+                    <span id="year"></span>
+                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية. جميع الحقوق محفوظة"
+                        data-en="Abdulrahman Scout Group. All rights reserved">فرقة عبدالرحمن بن القاسم الكشفية. جميع
+                        الحقوق محفوظة</span>
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll Indicator -->
-    <style>
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999;
-            animation: bounce 2s infinite;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-        .scroll-indicator.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        .scroll-indicator svg {
-            width: 24px;
-            height: 24px;
-            stroke: #1a5d2e;
-            stroke-width: 2;
-            fill: none;
-        }
-    </style>
-
-    <div class="scroll-indicator">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="12 5 12 19 M5 12 L12 19 L19 12"></polyline>
-        </svg>
-    </div>
-
+    <!-- Scripts - Load utils first -->
+    <script src="utils.js"></script>
     <script src="script.js"></script>
-    <script>
-        // Hide scroll indicator after leaving hero section
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        const heroSection = document.getElementById('home');
-        
-        window.addEventListener('scroll', () => {
-            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            if (window.scrollY > heroBottom - 100) {
-                scrollIndicator.classList.add('hidden');
-            } else {
-                scrollIndicator.classList.remove('hidden');
-            }
-        });
-    </script>
+</body>
+
+</html>
