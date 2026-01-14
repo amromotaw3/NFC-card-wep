@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم | Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 40px rgba(26, 93, 46, 0.15);
+            display: none;
+            border: 2px solid #e0e0e0;
+        }
+
+        .login-container.show {
+            display: block;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            color: #1a5d2e;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .login-header p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #1a5d2e;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1a5d2e;
+            box-shadow: 0 0 0 4px rgba(26, 93, 46, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a5d2e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #154028;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 93, 46, 0.2);
+        }
+
+        .error-msg {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+            border: 1px solid #fcc;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        /* Admin Dashboard */
+        .admin-panel {
+            display: none;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .admin-panel.show {
+            display: block;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #1a5d2e 0%, #2d7a3e 100%);
+            padding: 30px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(26, 93, 46, 0.2);
+            color: white;
+        }
+
+        .admin-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logout-btn {
+            padding: 12px 25px;
+            background: #fcc41c;
+            color: #1a5d2e;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #fbb406;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(252, 196, 28, 0.3);
+        }
+
+        .home-btn {
+            padding: 12px 25px;
+            background: #1a5d2e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            background: #2d7a3e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 93, 46, 0.3);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            background: #1a5d2e;
+            color: white;
+            border-color: #1a5d2e;
+        }
+
+        .tab-btn:hover {
+            border-color: #1a5d2e;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e0e0e0;
+        }
+
+        .tab-content.show {
+            display: block;
+        }
+
+        .edit-section {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .edit-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #1a5d2e;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group textarea {
+            font-family: 'Cairo', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+        }
+
+        .save-btn {
+            padding: 12px 35px;
+            background: #1a5d2e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .save-btn:hover {
+            background: #154028;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 93, 46, 0.2);
+        }
+
+        .success-msg {
+            background: #e8f9f0;
+            color: #1a5d2e;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+            border: 2px solid #c4f0e0;
+            font-weight: 600;
+        }
+
+        .success-msg.show {
+            display: block;
+        }
+
+        .items-list {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .item-card {
+            padding: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-card:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a5d2e;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .edit-btn {
+            background: #fcc41c;
+            color: #1a5d2e;
+        }
+
+        .edit-btn:hover {
+            background: #fbb406;
+            transform: translateY(-2px);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .add-btn {
+            padding: 12px 30px;
+            background: #fcc41c;
+            color: #1a5d2e;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-btn:hover {
+            background: #fbb406;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(252, 196, 28, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-actions {
+                width: 100%;
+            }
+
+            .edit-btn, .delete-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-header">
+            <h1>⚜️ لوحة التحكم</h1>
+            <p>Admin Dashboard</p>
+        </div>
+        <div class="error-msg" id="errorMsg"></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">كلمة المرور | Password</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+            <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> دخول | Login</button>
+        </form>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <div class="admin-title">لوحة التحكم | Admin Dashboard</div>
+            <div>
+                <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                <a href="index.html" class="home-btn"><i class="fas fa-home"></i> العودة للموقع</a>
+            </div>
+        </div>
+
+        <div class="success-msg" id="successMsg"></div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="hero"><i class="fas fa-home"></i> الصفحة الرئيسية</button>
+            <button class="tab-btn" data-tab="achievements"><i class="fas fa-trophy"></i> الإنجازات</button>
+            <button class="tab-btn" data-tab="participation"><i class="fas fa-handshake"></i> المشاركات</button>
+            <button class="tab-btn" data-tab="about"><i class="fas fa-info-circle"></i> عن الفرقة</button>
+            <button class="tab-btn" data-tab="leader"><i class="fas fa-user-tie"></i> القائد</button>
+            <button class="tab-btn" data-tab="videos"><i class="fas fa-video"></i> الفيديوهات</button>
+            <button class="tab-btn" data-tab="contact"><i class="fas fa-envelope"></i> التواصل</button>
+        </div>
+
+        <!-- Hero Tab -->
+        <div class="tab-content show" id="heroTab">
+            <div class="edit-section">
+                <div class="section-title">الصفحة الرئيسية</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>العنوان الرئيسي (AR)</label>
+                        <input type="text" id="heroTitleAr" placeholder="العنوان بالعربية">
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان الرئيسي (EN)</label>
+                        <input type="text" id="heroTitleEn" placeholder="Title in English">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (AR)</label>
+                        <textarea id="heroSubtitleAr" placeholder="الوصف بالعربية"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (EN)</label>
+                        <textarea id="heroSubtitleEn" placeholder="Description in English"></textarea>
+                    </div>
+                </div>
+                <button class="save-btn" onclick="saveSection('hero')"><i class="fas fa-save"></i> حفظ التعديلات</button>
+            </div>
+        </div>
+
+        <!-- Achievements Tab -->
+        <div class="tab-content" id="achievementsTab">
+            <button class="add-btn" onclick="openAchievementForm()"><i class="fas fa-plus-circle"></i> إضافة إنجاز جديد</button>
+            <div id="achievementsList"></div>
+        </div>
+
+        <!-- Participation Tab -->
+        <div class="tab-content" id="participationTab">
+            <button class="add-btn" onclick="openParticipationForm()"><i class="fas fa-plus-circle"></i> إضافة مشاركة جديدة</button>
+            <div id="participationList"></div>
+        </div>
+
+        <!-- About Tab -->
+        <div class="tab-content" id="aboutTab">
+            <div class="edit-section">
+                <div class="section-title">عن الفرقة</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>الرسالة (AR)</label>
+                        <textarea id="missionAr"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>الرسالة (EN)</label>
+                        <textarea id="missionEn"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>القيم (AR)</label>
+                        <textarea id="valuesAr"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>القيم (EN)</label>
+                        <textarea id="valuesEn"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>عدد الأعضاء</label>
+                        <input type="text" id="memberCount">
+                    </div>
+                    <div class="form-group">
+                        <label>سنة التأسيس</label>
+                        <input type="text" id="establishedYear">
+                    </div>
+                </div>
+                <button class="save-btn" onclick="saveSection('about')"><i class="fas fa-save"></i> حفظ التعديلات</button>
+            </div>
+        </div>
+
+        <!-- Leader Tab -->
+        <div class="tab-content" id="leaderTab">
+            <div class="edit-section">
+                <div class="section-title">القائد الكشفي</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>الخبرة (AR)</label>
+                        <input type="text" id="experienceAr">
+                    </div>
+                    <div class="form-group">
+                        <label>الخبرة (EN)</label>
+                        <input type="text" id="experienceEn">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (AR)</label>
+                        <textarea id="leaderDescAr"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (EN)</label>
+                        <textarea id="leaderDescEn"></textarea>
+                    </div>
+                </div>
+                <button class="save-btn" onclick="saveSection('leader')"><i class="fas fa-save"></i> حفظ التعديلات</button>
+            </div>
+        </div>
+
+        <!-- Videos Tab -->
+        <div class="tab-content" id="videosTab">
+            <button class="add-btn" onclick="openVideoForm()"><i class="fas fa-plus-circle"></i> إضافة فيديو جديد</button>
+            <div id="videosList"></div>
+        </div>
+
+        <!-- Contact Tab -->
+        <div class="tab-content" id="contactTab">
+            <div class="edit-section">
+                <div class="section-title">معلومات التواصل</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="text" id="contactPhone">
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان (AR)</label>
+                        <input type="text" id="contactAddressAr">
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان (EN)</label>
+                        <input type="text" id="contactAddressEn">
+                    </div>
+                </div>
+                <button class="save-btn" onclick="saveSection('contact')"><i class="fas fa-save"></i> حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
