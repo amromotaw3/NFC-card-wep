@@ -882,17 +882,14 @@ async function handleContactFormSubmit(e) {
     if (btnLoading) btnLoading.classList.remove('hidden');
 
     try {
-        // Submit form using the native form submission for Netlify Forms
+        // Submit form using Formspree.io
         const formData = new FormData(form);
         
-        // Add form name for Netlify
-        formData.append('form-name', 'contact');
-        
-        // Submit using fetch for better error handling
+        // Submit using fetch to Formspree endpoint
         // First try the fetch API approach
         let response;
         try {
-            response = await fetch('/', {
+            response = await fetch('https://formspree.io/f/xojjvknq', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -900,19 +897,14 @@ async function handleContactFormSubmit(e) {
                 },
             });
         } catch (fetchError) {
-            // If fetch fails (e.g., CORS issues when running locally),
-            // fall back to the native form submission
-            // This allows Netlify Forms to handle the submission
-            form.submit();
-            // Show success message and reset form
+            // If fetch fails, show error message
             showToast(
                 currentLanguage === 'ar'
-                    ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً'
-                    : 'Message sent successfully! We\'ll get back to you soon',
-                'success'
+                    ? 'حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى'
+                    : 'Connection error. Please try again',
+                'error'
             );
-            form.reset();
-            return; // Exit since we used native submission
+            return; // Exit since submission failed
         }
         
         if (response.ok) {
@@ -928,7 +920,8 @@ async function handleContactFormSubmit(e) {
             form.reset();
         } else {
             // Handle error response
-            throw new Error('Submission failed');
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Submission failed');
         }
     } catch (error) {
         showToast(
