@@ -1,7 +1,7 @@
 /**
  * NFC Card Web - Admin Panel Script
  * Scout Team Website - Admin Dashboard Logic
- * @version 3.0.0 - Simplified
+ * @version 4.0.0 - With API Sync
  */
 
 // ============================================================================
@@ -19,6 +19,9 @@ let editingItemId = null;
 
 /** @type {string|null} Currently editing item type */
 let editingItemType = null;
+
+/** @type {string|null} Stored admin password for API */
+let storedPassword = null;
 
 // ============================================================================
 // INITIALIZATION
@@ -82,10 +85,11 @@ function initEventListeners() {
  */
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+    storedPassword = sessionStorage.getItem('adminPassword');
     const loginContainer = document.getElementById('loginContainer');
     const adminPanel = document.getElementById('adminPanel');
 
-    if (isLoggedIn) {
+    if (isLoggedIn && storedPassword) {
         loginContainer?.classList.remove('show');
         adminPanel?.classList.add('show');
         loadAllData();
@@ -106,7 +110,9 @@ async function handleLogin(e) {
     const errorMsg = document.getElementById('errorMsg');
 
     if (password === ADMIN_PASSWORD) {
+        storedPassword = password;
         sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('adminPassword', password);
         errorMsg?.classList.remove('show');
         checkLogin();
     } else {
@@ -122,6 +128,8 @@ async function handleLogin(e) {
  */
 function handleLogout() {
     sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminPassword');
+    storedPassword = null;
     const passwordInput = document.getElementById('password');
     if (passwordInput) passwordInput.value = '';
     checkLogin();
@@ -305,8 +313,8 @@ async function saveSection(section) {
             break;
     }
 
-    // Save to localStorage
-    const result = ScoutUtils.saveData(data);
+    // Save to API (syncs across all devices)
+    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
 
     if (result.success) {
         showToast('تم حفظ التعديلات بنجاح | Changes saved successfully', 'success');
@@ -727,8 +735,8 @@ async function saveModalItem(type) {
             break;
     }
 
-    // Save to localStorage
-    const result = ScoutUtils.saveData(data);
+    // Save to API (syncs across all devices)
+    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
 
     if (result.success) {
         showToast(editingItemId ? 'تم تعديل العنصر بنجاح' : 'تم إضافة العنصر بنجاح', 'success');
@@ -793,8 +801,8 @@ async function deleteItem(type, id) {
             break;
     }
 
-    // Save to localStorage
-    const result = ScoutUtils.saveData(data);
+    // Save to API (syncs across all devices)
+    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
 
     if (result.success) {
         showToast('تم حذف العنصر بنجاح', 'success');
