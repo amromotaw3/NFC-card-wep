@@ -407,6 +407,9 @@ const ICON_OPTIONS = [
 // EXPORTS (for ES6 modules - future use)
 // ============================================================================
 
+// Configuration for remote data storage
+const REMOTE_API_URL = null; // Set to your backend API URL when available
+
 // Make functions available globally for current usage
 window.ScoutUtils = {
     STORAGE_KEY,
@@ -418,5 +421,6 @@ window.ScoutUtils = {
     createElement,
     generateId,
     debounce,
-    ICON_OPTIONS
+    ICON_OPTIONS,
+    REMOTE_API_URL
 };

@@ -1132,3 +1132,81 @@ function setupStorageListener() {
 
 window.showToast = showToast;
 window.loadDynamicContent = loadDynamicContent;
+
+// Helper function to refresh about section data
+window.refreshAboutData = function() {
+    // Force reload data from storage
+    const data = ScoutUtils.getStoredData();
+    renderAboutSection(data.about);
+    console.log('About section data refreshed');
+};
+
+// Helper function to update about data directly
+window.updateAboutData = function(memberCount, establishedYear) {
+    const data = ScoutUtils.getStoredData();
+    if (memberCount !== undefined) data.about.memberCount = memberCount;
+    if (establishedYear !== undefined) data.about.establishedYear = establishedYear;
+    
+    // Save to localStorage
+    ScoutUtils.saveData(data);
+    
+    // Refresh display
+    renderAboutSection(data.about);
+    console.log('About data updated:', { memberCount, establishedYear });
+};
+
+// Debug function to check current stored data
+window.checkAboutData = function() {
+    const data = ScoutUtils.getStoredData();
+    console.log('Current about data:', data.about);
+    console.log('Member count displayed:', document.getElementById('memberCountValue')?.textContent);
+    console.log('Established year displayed:', document.getElementById('establishedYearValue')?.textContent);
+    return data.about;
+};
+
+// Function to load data from remote API with fallback to local storage
+window.loadRemoteData = async function() {
+    try {
+        if (ScoutUtils.REMOTE_API_URL) {
+            const response = await fetch(ScoutUtils.REMOTE_API_URL);
+            if (response.ok) {
+                const remoteData = await response.json();
+                // Save remote data to local storage for offline access
+                ScoutUtils.saveData(remoteData);
+                return remoteData;
+            }
+        }
+    } catch (error) {
+        console.warn('Failed to load remote data, using local storage:', error);
+    }
+    
+    // Fallback to local storage
+    return ScoutUtils.getStoredData();
+};
+
+// Function to save data to remote API
+window.saveRemoteData = async function(data) {
+    try {
+        if (ScoutUtils.REMOTE_API_URL) {
+            const response = await fetch(ScoutUtils.REMOTE_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                console.log('Data saved to remote server successfully');
+                return { success: true };
+            } else {
+                throw new Error('Server responded with error');
+            }
+        }
+    } catch (error) {
+        console.warn('Failed to save to remote server, saving locally only:', error);
+    }
+    
+    // Fallback to local storage
+    return ScoutUtils.saveData(data);
+};
