@@ -774,10 +774,26 @@ function createVideoCard(item, index) {
     card.className = 'video-card animate-on-scroll';
     card.style.animationDelay = `${index * 0.1}s`;
 
-    // Thumbnail
+    // Thumbnail - using video thumbnail from video URL
     const thumbDiv = document.createElement('div');
     thumbDiv.className = 'video-thumbnail';
-    thumbDiv.style.backgroundImage = `url('${ScoutUtils.sanitizeHTML(item.thumbnail || '')}')`;
+    
+    // Extract YouTube thumbnail from video URL
+    let thumbnailUrl = '';
+    if (item.url) {
+        // Check if it's a YouTube URL
+        const youtubeMatch = item.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+        if (youtubeMatch) {
+            thumbnailUrl = `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`;
+        }
+    }
+    
+    // Fallback to provided thumbnail if no YouTube URL or extraction failed
+    if (!thumbnailUrl && item.thumbnail) {
+        thumbnailUrl = ScoutUtils.sanitizeHTML(item.thumbnail);
+    }
+    
+    thumbDiv.style.backgroundImage = `url('${thumbnailUrl}')`;
 
     // Play button
     const playLink = document.createElement('a');

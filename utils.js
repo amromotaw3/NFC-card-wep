@@ -128,22 +128,22 @@ function getDefaultData() {
                 id: 1,
                 titleAr: 'المخيم الكشفي السنوي',
                 titleEn: 'Annual Scout Camp',
-                thumbnail: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=340&fit=crop',
-                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                thumbnail: '',
+                url: 'https://www.youtube.com/watch?v=GuJLfqTFfIw'
             },
             {
                 id: 2,
                 titleAr: 'فعاليات اليوم الوطني',
                 titleEn: 'National Day Events',
-                thumbnail: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=340&fit=crop',
-                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                thumbnail: '',
+                url: 'https://www.youtube.com/watch?v=H-uYcDbFFE0'
             },
             {
                 id: 3,
                 titleAr: 'رحلة الكشافة البيئية',
                 titleEn: 'Environmental Scout Trip',
-                thumbnail: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=340&fit=crop',
-                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                thumbnail: '',
+                url: 'https://www.youtube.com/watch?v=J4pFd1F_R8o'
             }
         ],
         contact: {
