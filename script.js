@@ -41,9 +41,8 @@ function initTheme() {
             // Use saved preference
             applyTheme(savedTheme);
         } else {
-            // Use system preference
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark ? 'dark' : 'light');
+            // Default to light theme instead of system preference
+            applyTheme('light');
         }
     } catch (e) {
         console.warn('Could not read theme preference:', e);
@@ -883,64 +882,54 @@ async function handleContactFormSubmit(e) {
     if (btnLoading) btnLoading.classList.remove('hidden');
 
     try {
-        // Submit the form to trigger Netlify Forms
-        // The form submission will be handled automatically by Netlify
-        // when deployed on Netlify with proper attributes
+        // Submit form using the native form submission for Netlify Forms
+        const formData = new FormData(form);
         
-        // Create a temporary form element to submit
-        const formElement = document.createElement('form');
-        formElement.method = 'POST';
-        formElement.style.display = 'none';
-        formElement.innerHTML = `
-            <input type="hidden" name="form-name" value="contact" />
-        `;
+        // Add form name for Netlify
+        formData.append('form-name', 'contact');
         
-        // Add form fields
-        const name = document.getElementById('formName').value;
-        const email = document.getElementById('formEmail').value;
-        const message = document.getElementById('formMessage').value;
+        // Submit using fetch for better error handling
+        // First try the fetch API approach
+        let response;
+        try {
+            response = await fetch('/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                },
+            });
+        } catch (fetchError) {
+            // If fetch fails (e.g., CORS issues when running locally),
+            // fall back to the native form submission
+            // This allows Netlify Forms to handle the submission
+            form.submit();
+            // Show success message and reset form
+            showToast(
+                currentLanguage === 'ar'
+                    ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً'
+                    : 'Message sent successfully! We\'ll get back to you soon',
+                'success'
+            );
+            form.reset();
+            return; // Exit since we used native submission
+        }
         
-        const nameInput = document.createElement('input');
-        nameInput.type = 'hidden';
-        nameInput.name = 'name';
-        nameInput.value = name;
-        formElement.appendChild(nameInput);
-        
-        const emailInput = document.createElement('input');
-        emailInput.type = 'hidden';
-        emailInput.name = 'email';
-        emailInput.value = email;
-        formElement.appendChild(emailInput);
-        
-        const messageInput = document.createElement('input');
-        messageInput.type = 'hidden';
-        messageInput.name = 'message';
-        messageInput.value = message;
-        formElement.appendChild(messageInput);
-        
-        document.body.appendChild(formElement);
-        
-        // Submit the form
-        formElement.submit();
-        
-        // Remove the temporary form after a delay
-        setTimeout(() => {
-            if (formElement.parentNode) {
-                document.body.removeChild(formElement);
-            }
-        }, 1000);
-        
-        // Show success message
-        showToast(
-            currentLanguage === 'ar'
-                ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً'
-                : 'Message sent successfully! We\'ll get back to you soon',
-            'success'
-        );
+        if (response.ok) {
+            // Show success message
+            showToast(
+                currentLanguage === 'ar'
+                    ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً'
+                    : 'Message sent successfully! We\'ll get back to you soon',
+                'success'
+            );
 
-        // Reset form
-        form.reset();
-
+            // Reset form
+            form.reset();
+        } else {
+            // Handle error response
+            throw new Error('Submission failed');
+        }
     } catch (error) {
         showToast(
             currentLanguage === 'ar'
