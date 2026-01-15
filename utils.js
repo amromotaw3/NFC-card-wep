@@ -380,7 +380,27 @@ const ICON_OPTIONS = [
     { value: 'fas fa-tree', label: '🌳 شجرة | Tree' },
     { value: 'fas fa-handshake', label: '🤝 مصافحة | Handshake' },
     { value: 'fas fa-hands-helping', label: '🙌 مساعدة | Helping' },
-    { value: 'fas fa-globe', label: '🌍 كوكب | Globe' }
+    { value: 'fas fa-globe', label: '🌍 كوكب | Globe' },
+    { value: 'fas fa-crown', label: '👑 تاج | Crown' },
+    { value: 'fas fa-flag', label: '🏁 علم | Flag' },
+    { value: 'fas fa-shield-alt', label: '🛡️ درع | Shield' },
+    { value: 'fas fa-bolt', label: '⚡ برق | Lightning' },
+    { value: 'fas fa-fire', label: '🔥 نار | Fire' },
+    { value: 'fas fa-diamond', label: '💎 ماسة | Diamond' },
+    { value: 'fas fa-leaf', label: '🍃 ورقة | Leaf' },
+    { value: 'fas fa-mountain', label: '⛰️ جبل | Mountain' },
+    { value: 'fas fa-water', label: '💧 ماء | Water' },
+    { value: 'fas fa-sun', label: '☀️ شمس | Sun' },
+    { value: 'fas fa-moon', label: '🌙 قمر | Moon' },
+    { value: 'fas fa-cloud', label: '☁️ سحابة | Cloud' },
+    { value: 'fas fa-bell', label: '🔔 جرس | Bell' },
+    { value: 'fas fa-lightbulb', label: '💡 لمبة | Lightbulb' },
+    { value: 'fas fa-book', label: '📚 كتاب | Book' },
+    { value: 'fas fa-graduation-cap', label: '🎓 تخرج | Graduation' },
+    { value: 'fas fa-tools', label: '🛠️ أدوات | Tools' },
+    { value: 'fas fa-rocket', label: '🚀 صاروخ | Rocket' },
+    { value: 'fas fa-umbrella', label: '☂️ مظلة | Umbrella' },
+    { value: 'fas fa-feather', label: '🪶 ريشة | Feather' }
 ];
 
 // ============================================================================
