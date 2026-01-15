@@ -358,12 +358,6 @@ function initGlassmorphicHeader() {
     function updateHeader() {
         const scrollY = window.scrollY;
 
-        if (scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
         lastScrollY = scrollY;
         ticking = false;
     }
@@ -722,12 +716,20 @@ function renderAboutSection(aboutData) {
 function renderLeaderSection(leaderData) {
     if (!leaderData) return;
 
-    // Experience
-    const experienceEl = document.getElementById('leaderExperience');
-    if (experienceEl) {
-        experienceEl.dataset.ar = leaderData.experienceAr || '';
-        experienceEl.dataset.en = leaderData.experienceEn || '';
-        experienceEl.textContent = currentLanguage === 'ar' ? leaderData.experienceAr : leaderData.experienceEn;
+    // Leader name
+    const nameEl = document.querySelector('#leader .leader-info h3');
+    if (nameEl) {
+        nameEl.dataset.ar = leaderData.nameAr || 'القائد الكشفي';
+        nameEl.dataset.en = leaderData.nameEn || 'Scout Leader';
+        nameEl.textContent = currentLanguage === 'ar' ? (leaderData.nameAr || 'القائد الكشفي') : (leaderData.nameEn || 'Scout Leader');
+    }
+    
+    // Leader bio
+    const bioEl = document.getElementById('leaderBio');
+    if (bioEl) {
+        bioEl.dataset.ar = leaderData.bioAr || '';
+        bioEl.dataset.en = leaderData.bioEn || '';
+        bioEl.textContent = currentLanguage === 'ar' ? leaderData.bioAr : leaderData.bioEn;
     }
 }
 
@@ -881,9 +883,53 @@ async function handleContactFormSubmit(e) {
     if (btnLoading) btnLoading.classList.remove('hidden');
 
     try {
-        // Simulate sending (in real app, this would be an API call)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
+        // Submit the form to trigger Netlify Forms
+        // The form submission will be handled automatically by Netlify
+        // when deployed on Netlify with proper attributes
+        
+        // Create a temporary form element to submit
+        const formElement = document.createElement('form');
+        formElement.method = 'POST';
+        formElement.style.display = 'none';
+        formElement.innerHTML = `
+            <input type="hidden" name="form-name" value="contact" />
+        `;
+        
+        // Add form fields
+        const name = document.getElementById('formName').value;
+        const email = document.getElementById('formEmail').value;
+        const message = document.getElementById('formMessage').value;
+        
+        const nameInput = document.createElement('input');
+        nameInput.type = 'hidden';
+        nameInput.name = 'name';
+        nameInput.value = name;
+        formElement.appendChild(nameInput);
+        
+        const emailInput = document.createElement('input');
+        emailInput.type = 'hidden';
+        emailInput.name = 'email';
+        emailInput.value = email;
+        formElement.appendChild(emailInput);
+        
+        const messageInput = document.createElement('input');
+        messageInput.type = 'hidden';
+        messageInput.name = 'message';
+        messageInput.value = message;
+        formElement.appendChild(messageInput);
+        
+        document.body.appendChild(formElement);
+        
+        // Submit the form
+        formElement.submit();
+        
+        // Remove the temporary form after a delay
+        setTimeout(() => {
+            if (formElement.parentNode) {
+                document.body.removeChild(formElement);
+            }
+        }, 1000);
+        
         // Show success message
         showToast(
             currentLanguage === 'ar'

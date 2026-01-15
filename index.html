@@ -24,11 +24,12 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" href="scout-team-logo-AtpW4kh9.png" />
 </head>
 
 <body>
     <!-- Header with Mobile Navigation -->
-    <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
                 <!-- Mobile Menu Toggle -->
@@ -44,8 +45,9 @@
                         <i class="fas fa-sun" id="themeIconLight"></i>
                         <i class="fas fa-moon hidden" id="themeIconDark"></i>
                     </button>
+                    
                     <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-                        <span class="lang-icon"><i class="fas fa-language"></i></span>
+                        <span class="lang-icon"><i class="fa-solid fa-language"></i></span>
                         <span class="lang-text" data-ar="EN" data-en="عربي">EN</span>
                     </button>
                     <a href="admin.html" class="admin-link" title="Admin Panel" aria-label="Admin Panel">
@@ -77,7 +79,13 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background"></div>
+        <div class="hero-video-background">
+            <video autoplay muted loop playsinline poster="scout-team-logo-AtpW4kh9.png">
+                <source src="vid.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-emblem">
@@ -101,10 +109,13 @@
         <!-- Scroll Indicator -->
         <div class="scroll-indicator" id="scrollIndicator">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <polyline points="12 5 12 19 M5 12 L12 19 L19 12"></polyline>
+                <path d="M12 2 L12 18 M6 12 L12 18 L18 12" fill="none"/>
             </svg>
         </div>
     </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- Achievements Section - Dynamic via JS -->
     <section id="achievements" class="section achievements-section">
@@ -125,6 +136,9 @@
         </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Participation Section - Dynamic via JS -->
     <section id="participation" class="section participation-section">
         <div class="container">
@@ -144,6 +158,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- About Section -->
     <section id="about" class="section about-section">
@@ -191,6 +208,9 @@
         </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Leader Section -->
     <section id="leader" class="section leader-section">
         <div class="container">
@@ -205,36 +225,22 @@
                         <img src="scouts leader.jpg" alt="Scout Leader" loading="lazy">
                     </div>
                     <div class="leader-info">
-                        <h3 data-ar="القائد الكشفي" data-en="Scout Leader">القائد الكشفي</h3>
+                        <h3 data-ar="القائد الكشفي" data-en="Scout Leader">عبدالرحمن الرميح</h3>
                         <p data-ar="فرقة عبدالرحمن بن القاسم" data-en="Abdulrahman Group">فرقة عبدالرحمن بن القاسم</p>
                     </div>
                 </div>
-                <div class="leader-details">
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-briefcase"></i></div>
-                        <h4 data-ar="الخبرة" data-en="Experience">الخبرة</h4>
-                        <p id="leaderExperience" data-experience data-ar="+15 سنة من القيادة الكشفية والتطوير"
-                            data-en="15+ Years of scout leadership and development">+15 سنة من القيادة الكشفية والتطوير
-                        </p>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-trophy"></i></div>
-                        <h4 data-ar="الإنجازات" data-en="Achievements">الإنجازات</h4>
-                        <div id="leaderAchievements">
-                            <p>
-                                <strong data-ar="قائد كشفي معتمد" data-en="Certified Scout Leader">قائد كشفي
-                                    معتمد</strong><br>
-                                <strong data-ar="مدرب في القيادة الشبابية" data-en="Youth Leadership Trainer">مدرب في
-                                    القيادة الشبابية</strong><br>
-                                <strong data-ar="عضو الجمعية الكشفية السعودية"
-                                    data-en="Member of Saudi Scout Association">عضو الجمعية الكشفية</strong>
-                            </p>
-                        </div>
+                <div class="leader-bio-card">
+                    <div class="bio-content">
+                        <h4 class="bio-title" data-ar="نبذة عن القائد" data-en="About the Leader">نبذة عن القائد</h4>
+                        <p class="bio-text" id="leaderBio" data-ar="قائد كشفي متمرس يتمتع بخبرة تزيد عن 15 عامًا في مجال القيادة الكشفية وتطوير البرامج الشبابية. ملتزم بتعليم قيم القيادة والمسؤولية للمشاركين في الفرقة الكشفية." data-en="An experienced scout leader with over 15 years in scout leadership and youth program development. Committed to teaching leadership values and responsibility to participants in the scout group.">قائد كشفي متمرس يتمتع بخبرة تزيد عن 15 عامًا في مجال القيادة الكشفية وتطوير البرامج الشبابية. ملتزم بتعليم قيم القيادة والمسؤولية للمشاركين في الفرقة الكشفية.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- Videos Section - Dynamic via JS -->
     <section id="videos" class="section videos-section">
@@ -253,6 +259,34 @@
             </div>
         </div>
     </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Visit Our Website Section -->
+    <section id="visit" class="section visit-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-ar="زوروا موقعنا الآن" data-en="Visit Our Website Now">زوروا موقعنا الآن</h2>
+                <p class="section-subtitle" data-ar="اكتشفوا تجربتنا الرقمية المميزة" data-en="Discover our premium digital experience">اكتشفوا تجربتنا الرقمية المميزة</p>
+            </div>
+            <div class="visit-content">
+                <div class="image-container">
+                    <img src="Screenshot.png" alt="Website Screenshot" class="website-screenshot">
+                </div>
+                <div class="visit-description">
+                    <h3 class="journey-title" data-ar="ابدأ رحلتك الكشفية اليوم" data-en="Start Your Scout Journey Today">ابدأ رحلتك الكشفية اليوم</h3>
+                    <p class="journey-subtitle" data-ar="انضم لفريق الكشافة وكن جزءاً من عائلة تصنع قادة المستقبل" data-en="Join the scout team and become part of a family that shapes future leaders">انضم لفريق الكشافة وكن جزءاً من عائلة تصنع قادة المستقبل</p>
+                    <a href="https://scout-abdulrahman-bin-al-qasim.lovable.app/" class="btn btn-primary" data-ar="ابدأ الآن" data-en="Get Started">
+                        <span class="btn-text">ابدأ الآن</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
 
     <!-- Contact Section -->
     <section id="contact" class="section contact-section">
@@ -289,7 +323,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm" novalidate>
+                <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify novalidate>
                     <div class="form-group">
                         <input type="text" id="formName" name="name" data-ar="الاسم" data-en="Name"
                             placeholder="الاسم / Name" required aria-required="true">
@@ -314,23 +348,12 @@
         </div>
     </section>
 
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="footer-emblem">⚜️</div>
-                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية" data-en="Abdulrahman Scout Group">فرقة عبدالرحمن بن
-                        القاسم الكشفية</span>
-                </div>
-                <p class="footer-copy">
-                    <span id="year"></span>
-                    <span data-ar="فرقة عبدالرحمن بن القاسم الكشفية. جميع الحقوق محفوظة"
-                        data-en="Abdulrahman Scout Group. All rights reserved">فرقة عبدالرحمن بن القاسم الكشفية. جميع
-                        الحقوق محفوظة</span>
-                </p>
-            </div>
-        </div>
+
     </footer>
 
     <!-- Toast Container for Notifications -->
@@ -340,5 +363,3 @@
     <script src="utils.js"></script>
     <script src="script.js"></script>
 </body>
-
-</html>

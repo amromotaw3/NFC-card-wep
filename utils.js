@@ -116,20 +116,12 @@ function getDefaultData() {
             establishedYear: '2015'
         },
         leader: {
-            experienceAr: '+15 سنة من القيادة الكشفية والتطوير',
-            experienceEn: '15+ Years of scout leadership and development',
+            nameAr: 'عبدالرحمن الرميح',
+            nameEn: 'Abdulrahman Al-Rumaih',
+            bioAr: 'يُعدّ القائد الكشفي عبدالرحمن الرميح نموذجًا للقائد التربوي الذي يجمع بين الانضباط الكشفي، والوعي المجتمعي، والقدرة على بناء الإنسان قبل النشاط. لا يقتصر دوره على إدارة الفرق أو تنظيم البرامج، بل يمتد إلى تشكيل القيم، وصقل الشخصية، وغرس روح المسؤولية والعمل الجماعي في أفراد فرقته.\n\nينطلق عبدالرحمن في قيادته من جوهر الحركة الكشفية: التربية بالممارسة. فهو يؤمن بأن القيادة لا تُمارَس بالأوامر، بل بالقدوة، وبأن القائد الحقيقي هو من يصنع قادة آخرين، لا تابعين. يظهر ذلك في حرصه على إشراك الكشافين في اتخاذ القرار، وتحميلهم مسؤوليات حقيقية تتناسب مع أعمارهم وقدراتهم، مما يعزز الثقة بالنفس ويُنمّي مهارات القيادة المبكرة.\n\nعلى المستوى التنظيمي، يتميز بأسلوب عمل يعتمد على التخطيط المسبق، وضبط التفاصيل، وربط الأنشطة الكشفية بأهداف تربوية واضحة، سواء في المعسكرات، أو المشاركات المجتمعية، أو البرامج التدريبية. وهو يدرك أن النشاط الكشفي لا يُقاس بعدد الفعاليات، بل بأثرها المستدام على سلوك الفرد وعلاقته بمجتمعه.\n\nأما في خدمة المجتمع، فينظر عبدالرحمن إلى الكشافة كقوة تطوعية فاعلة، لا كأنشطة موسمية. لذلك يركّز على المبادرات التي تعزز الانتماء الوطني، وتدعم القيم الإنسانية، وتربط الكشاف ببيئته ومجتمعه المحلي، بما ينسجم مع رسالة الحركة الكشفية عالميًا ومحليًا.\n\nشخصيته القيادية تتسم بالهدوء والحزم في آنٍ واحد؛ يستمع قبل أن يقرّر، ويُقيّم قبل أن يُحاسب، ويعالج الأخطاء باعتبارها فرصًا للتعلّم لا أدوات للعقاب. هذا التوازن هو ما يمنحه احترام أفراد فرقته وثقتهم، ويجعله مرجعًا تربويًا قبل أن يكون قائدًا إداريًا.\n\nباختصار، يمثل القائد الكشفي عبدالرحمن الرميح قيادة واعية تؤمن بأن بناء الإنسان هو أعظم إنجاز كشفي، وأن أثر القائد الحقيقي لا يُقاس بما ينجزه بنفسه، بل بما يتركه في نفوس من قادهم.',
+            bioEn: 'Scout Leader Abdulrahman Al-Rumaih is a model of an educational leader who combines scouting discipline, community awareness, and the ability to build human beings before activities. His role is not limited to managing teams or organizing programs, but extends to shaping values, refining personality, and instilling a sense of responsibility and teamwork among his team members.\n\nAbdulrahman launches his leadership from the essence of the scouting movement: education through practice. He believes that leadership is not practiced through orders but through example, and that the true leader is one who creates other leaders, not followers. This is evident in his commitment to involving scouts in decision-making and entrusting them with real responsibilities that match their ages and abilities, enhancing self-confidence and developing early leadership skills.\n\nAt the organizational level, he is characterized by a work approach based on advance planning, attention to detail, and linking scouting activities to clear educational goals, whether in camps, community participation, or training programs. He understands that scouting activity is not measured by the number of events, but by their lasting impact on individual behavior and their relationship with society.\n\nAs for community service, Abdulrahman sees scouting as an effective volunteer force, not seasonal activities. Therefore, he focuses on initiatives that strengthen national belonging, support humanitarian values, and connect scouts to their environment and local community, in line with the global and local scouting movement mission.\n\nHis leadership personality is characterized by calmness and firmness at the same time; he listens before deciding, evaluates before judging, and treats mistakes as learning opportunities rather than punishment tools. This balance is what grants him the respect and confidence of his team members, making him an educational reference before being an administrative leader.\n\nIn short, Scout Leader Abdulrahman Al-Rumaih represents an aware leadership that believes human building is the greatest scouting achievement, and the impact of a true leader is not measured by what he accomplishes himself, but by what he leaves in the souls of those he led.',
             descAr: 'خبرة واسعة في القيادة الكشفية وتطوير البرامج الشبابية',
-            descEn: 'Extensive experience in scout leadership and youth program development',
-            achievementsAr: [
-                'قائد كشفي معتمد',
-                'مدرب في القيادة الشبابية',
-                'عضو الجمعية الكشفية السعودية'
-            ],
-            achievementsEn: [
-                'Certified Scout Leader',
-                'Youth Leadership Trainer',
-                'Member of Saudi Scout Association'
-            ]
+            descEn: 'Extensive experience in scout leadership and youth program development'
         },
         videos: [
             {
