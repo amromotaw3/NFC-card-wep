@@ -166,13 +166,8 @@ function switchTab(tabName) {
 /**
  * Load all data into form fields
  */
-async function loadAllData() {
-    let data;
-    try {
-        data = await ScoutUtils.fetchDataFromAPI();
-    } catch (e) {
-        data = ScoutUtils.getStoredData();
-    }
+function loadAllData() {
+    const data = ScoutUtils.getStoredData();
 
     // Hero
     loadHeroData(data.hero);
@@ -313,8 +308,8 @@ async function saveSection(section) {
             break;
     }
 
-    // Save to API (syncs across all devices)
-    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast('تم حفظ التعديلات بنجاح | Changes saved successfully', 'success');
@@ -735,8 +730,8 @@ async function saveModalItem(type) {
             break;
     }
 
-    // Save to API (syncs across all devices)
-    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast(editingItemId ? 'تم تعديل العنصر بنجاح' : 'تم إضافة العنصر بنجاح', 'success');
@@ -801,8 +796,8 @@ async function deleteItem(type, id) {
             break;
     }
 
-    // Save to API (syncs across all devices)
-    const result = await ScoutUtils.saveDataToAPI(data, storedPassword);
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast('تم حذف العنصر بنجاح', 'success');

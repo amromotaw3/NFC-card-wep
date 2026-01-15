@@ -9,7 +9,6 @@
 // ============================================================================
 
 const STORAGE_KEY = 'scoutGroupData';
-const API_URL = '/api/data';
 
 // ============================================================================
 // DATA MANAGEMENT
@@ -176,7 +175,6 @@ function isStorageAvailable() {
  * @returns {Object} Application data
  */
 function getStoredData() {
-    // Get from localStorage as cache
     if (isStorageAvailable()) {
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
@@ -192,59 +190,7 @@ function getStoredData() {
 }
 
 /**
- * Fetch data from API (server) - for syncing across devices
- * @returns {Promise<Object>} Application data from server
- */
-async function fetchDataFromAPI() {
-    try {
-        const response = await fetch(API_URL);
-        if (response.ok) {
-            const data = await response.json();
-            // Cache in localStorage
-            if (isStorageAvailable()) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            }
-            return data;
-        }
-    } catch (error) {
-        console.warn('API not available, using local data:', error);
-    }
-    return getStoredData();
-}
-
-/**
- * Save data to API (server) - for syncing across devices
- * @param {Object} data - Data to save
- * @param {string} password - Admin password
- * @returns {Promise<{success: boolean, error?: string}>}
- */
-async function saveDataToAPI(data, password) {
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data, password })
-        });
-
-        if (response.ok) {
-            // Also save to localStorage as cache
-            if (isStorageAvailable()) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            }
-            return { success: true };
-        } else if (response.status === 401) {
-            return { success: false, error: 'كلمة المرور غير صحيحة | Wrong password' };
-        } else {
-            return { success: false, error: 'خطأ في الحفظ | Save error' };
-        }
-    } catch (error) {
-        console.warn('API save failed, saving locally:', error);
-        return saveData(data);
-    }
-}
-
-/**
- * Save data to localStorage only (local cache)
+ * Save data to localStorage
  * @param {Object} data - Data to save
  * @returns {{success: boolean, error?: string}} Result of save operation
  */
@@ -456,12 +402,9 @@ const ICON_OPTIONS = [
 // Make functions available globally
 window.ScoutUtils = {
     STORAGE_KEY,
-    API_URL,
     getDefaultData,
     getStoredData,
-    fetchDataFromAPI,
     saveData,
-    saveDataToAPI,
     isStorageAvailable,
     sanitizeHTML,
     createElement,
