@@ -136,6 +136,9 @@ const defaultData = {
     }
 };
 
+// Default admin password - CHANGE THIS in Vercel Environment Variables
+const DEFAULT_ADMIN_PASSWORD = 'admin2026';
+
 export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -145,6 +148,9 @@ export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
+
+    // Use environment variable or fallback to default
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
 
     try {
         if (req.method === 'GET') {
@@ -161,22 +167,30 @@ export default async function handler(req, res) {
         }
 
         if (req.method === 'POST') {
-            // Verify admin password
-            const { password, data } = req.body;
+            const { password, data, action } = req.body;
             
-            if (password !== process.env.ADMIN_PASSWORD) {
-                return res.status(401).json({ error: 'Unauthorized' });
+            // Verify admin password
+            if (password !== ADMIN_PASSWORD) {
+                return res.status(401).json({ error: 'Unauthorized', message: 'Wrong password' });
+            }
+
+            // If just verifying password (login)
+            if (action === 'verify') {
+                return res.status(200).json({ success: true, message: 'Password verified' });
             }
 
             // Save data to KV store
-            await kv.set('scoutData', data);
-            
-            return res.status(200).json({ success: true, message: 'Data saved successfully' });
+            if (data) {
+                await kv.set('scoutData', data);
+                return res.status(200).json({ success: true, message: 'Data saved successfully' });
+            }
+
+            return res.status(400).json({ error: 'No data provided' });
         }
 
         return res.status(405).json({ error: 'Method not allowed' });
     } catch (error) {
         console.error('API Error:', error);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 }
