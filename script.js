@@ -41,8 +41,9 @@ function initTheme() {
             // Use saved preference
             applyTheme(savedTheme);
         } else {
-            // Default to light theme instead of system preference
-            applyTheme('light');
+            // Check system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
         }
     } catch (e) {
         console.warn('Could not read theme preference:', e);
@@ -51,7 +52,7 @@ function initTheme() {
 }
 
 /**
- * Apply theme to document
+ * Apply theme to document with smooth transition
  * @param {string} theme - 'dark' or 'light'
  */
 function applyTheme(theme) {
@@ -59,16 +60,25 @@ function applyTheme(theme) {
     const themeIconLight = document.getElementById('themeIconLight');
     const themeIconDark = document.getElementById('themeIconDark');
 
+    // Add transition class for smooth theme change
+    body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+
     if (theme === 'dark') {
         body.classList.remove('light-theme');
         body.classList.add('dark-theme');
         themeIconLight?.classList.add('hidden');
         themeIconDark?.classList.remove('hidden');
+        
+        // Update meta theme color for mobile browsers
+        updateMetaThemeColor('#0a0f0d');
     } else {
         body.classList.remove('dark-theme');
         body.classList.add('light-theme');
         themeIconLight?.classList.remove('hidden');
         themeIconDark?.classList.add('hidden');
+        
+        // Update meta theme color for mobile browsers
+        updateMetaThemeColor('#fafafa');
     }
 
     // Save preference
@@ -77,6 +87,27 @@ function applyTheme(theme) {
     } catch (e) {
         console.warn('Could not save theme preference:', e);
     }
+    
+    // Remove transition after animation completes
+    setTimeout(() => {
+        body.style.transition = '';
+    }, 300);
+}
+
+/**
+ * Update meta theme color for mobile browsers
+ * @param {string} color - Theme color
+ */
+function updateMetaThemeColor(color) {
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    
+    if (!metaThemeColor) {
+        metaThemeColor = document.createElement('meta');
+        metaThemeColor.name = 'theme-color';
+        document.head.appendChild(metaThemeColor);
+    }
+    
+    metaThemeColor.content = color;
 }
 
 /**
@@ -475,10 +506,16 @@ function animateCounter(element) {
 // ============================================================================
 
 /**
- * Load and render all dynamic content from storage
+ * Load and render all dynamic content from API/storage
  */
-function loadDynamicContent() {
-    const data = ScoutUtils.getStoredData();
+async function loadDynamicContent() {
+    // Try to fetch from API first, fallback to localStorage
+    let data;
+    try {
+        data = await ScoutUtils.fetchDataFromAPI();
+    } catch (e) {
+        data = ScoutUtils.getStoredData();
+    }
 
     renderHeroSection(data.hero);
     renderAchievements(data.achievements);

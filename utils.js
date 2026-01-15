@@ -9,6 +9,7 @@
 // ============================================================================
 
 const STORAGE_KEY = 'scoutGroupData';
+const API_URL = '/api/data';
 
 // ============================================================================
 // DATA MANAGEMENT
@@ -171,34 +172,48 @@ function isStorageAvailable() {
 }
 
 /**
- * Get stored data from localStorage with error handling
- * Falls back to default data if storage fails or data is corrupted
+ * Get stored data from API with localStorage fallback
  * @returns {Object} Application data
  */
 function getStoredData() {
-    if (!isStorageAvailable()) {
-        console.warn('localStorage is not available, using default data');
-        return getDefaultData();
-    }
-
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) {
-            return getDefaultData();
+    // First try to get from localStorage as cache
+    if (isStorageAvailable()) {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                return mergeWithDefaults(parsed, getDefaultData());
+            }
+        } catch (e) {
+            console.warn('Error reading localStorage:', e);
         }
-
-        const parsed = JSON.parse(stored);
-        
-        // Validate data structure - merge with defaults to ensure all fields exist
-        return mergeWithDefaults(parsed, getDefaultData());
-    } catch (e) {
-        console.error('Error parsing stored data:', e);
-        return getDefaultData();
     }
+    return getDefaultData();
 }
 
 /**
- * Save data to localStorage with error handling
+ * Fetch data from API (async version)
+ * @returns {Promise<Object>} Application data
+ */
+async function fetchDataFromAPI() {
+    try {
+        const response = await fetch(API_URL);
+        if (response.ok) {
+            const data = await response.json();
+            // Cache in localStorage
+            if (isStorageAvailable()) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            }
+            return data;
+        }
+    } catch (error) {
+        console.warn('API fetch failed, using local data:', error);
+    }
+    return getStoredData();
+}
+
+/**
+ * Save data to localStorage (local cache)
  * @param {Object} data - Data to save
  * @returns {{success: boolean, error?: string}} Result of save operation
  */
@@ -229,6 +244,38 @@ function saveData(data) {
             success: false, 
             error: 'حدث خطأ في الحفظ | Error saving data' 
         };
+    }
+}
+
+/**
+ * Save data to API (async version for admin)
+ * @param {Object} data - Data to save
+ * @param {string} password - Admin password
+ * @returns {Promise<{success: boolean, error?: string}>} Result of save operation
+ */
+async function saveDataToAPI(data, password) {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data, password })
+        });
+
+        if (response.ok) {
+            // Also save to localStorage as cache
+            saveData(data);
+            return { success: true };
+        } else if (response.status === 401) {
+            return { success: false, error: 'كلمة المرور غير صحيحة | Wrong password' };
+        } else {
+            return { success: false, error: 'حدث خطأ في الحفظ | Error saving data' };
+        }
+    } catch (error) {
+        console.error('API save error:', error);
+        // Fallback to localStorage only
+        return saveData(data);
     }
 }
 
@@ -413,9 +460,12 @@ const REMOTE_API_URL = null; // Set to your backend API URL when available
 // Make functions available globally for current usage
 window.ScoutUtils = {
     STORAGE_KEY,
+    API_URL,
     getDefaultData,
     getStoredData,
+    fetchDataFromAPI,
     saveData,
+    saveDataToAPI,
     isStorageAvailable,
     sanitizeHTML,
     createElement,

@@ -95,20 +95,7 @@
     --z-toast: 1100;
 }
 
-/* Dark Mode Variables */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #0a0a0a;
-        --color-bg-alt: #141414;
-        --color-surface: #1a1a1a;
-        --color-text: #f0f0f0;
-        --color-text-light: #b0b0b0;
-        --color-text-muted: #707070;
-        --color-border: rgba(255, 255, 255, 0.1);
-        --glass-bg: rgba(30, 30, 30, 0.8);
-        --glass-border: rgba(255, 255, 255, 0.1);
-    }
-}
+/* Dark Mode Variables - Disabled auto-detection, manual toggle only */
 
 /* ============================================================================
    RESET & BASE STYLES
@@ -785,12 +772,16 @@ img {
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(var(--color-accent-rgb), 0.5);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 
+        0 10px 40px rgba(var(--color-accent-rgb), 0.6),
+        0 0 60px rgba(var(--color-accent-rgb), 0.3);
+    filter: brightness(1.1);
 }
 
 .btn-primary:active {
-    transform: translateY(-1px) scale(0.98);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 20px rgba(var(--color-accent-rgb), 0.4);
 }
 
 .btn-primary:disabled {
@@ -807,10 +798,17 @@ img {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     border-color: var(--color-accent);
     color: var(--color-accent);
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 
+        0 8px 30px rgba(var(--color-accent-rgb), 0.3),
+        0 0 50px rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:active {
+    transform: translateY(-2px) scale(1.02);
 }
 
 .btn-text {
@@ -949,12 +947,21 @@ body.dark-theme .section-separator {
 }
 
 .achievement-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        var(--shadow-xl), 
+        0 0 50px rgba(var(--color-primary-rgb), 0.25),
+        0 0 100px rgba(var(--color-accent-rgb), 0.15);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
 }
 
 .achievement-card:hover::before {
     transform: scaleX(1);
+}
+
+.achievement-card:active {
+    transform: translateY(-6px) scale(1.01);
+    transition: transform 0.1s ease;
 }
 
 .achievement-year {
@@ -973,6 +980,18 @@ body.dark-theme .section-separator {
     margin-bottom: var(--spacing-md);
     color: var(--color-accent);
     text-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.3);
+    transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.achievement-card:hover .achievement-icon {
+    transform: scale(1.15) rotate(-5deg);
+    filter: drop-shadow(0 8px 20px rgba(var(--color-accent-rgb), 0.5));
+    animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1.15) rotate(-5deg); }
+    50% { transform: scale(1.2) rotate(-5deg); }
 }
 
 .achievement-title {
@@ -1020,8 +1039,17 @@ body.dark-theme .section-separator {
 }
 
 .participation-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-xl), 0 0 40px rgba(var(--color-accent-rgb), 0.15);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 
+        var(--shadow-xl), 
+        0 0 60px rgba(var(--color-primary-rgb), 0.3),
+        0 0 100px rgba(var(--color-accent-rgb), 0.2);
+    border-color: rgba(var(--color-accent-rgb), 0.4);
+}
+
+.participation-card:active {
+    transform: translateY(-6px) scale(1.01);
+    transition: transform 0.1s ease;
 }
 
 .participation-card .card-icon {
@@ -1039,9 +1067,16 @@ body.dark-theme .section-separator {
 }
 
 .participation-card:hover .card-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.2) rotate(10deg);
     background: linear-gradient(135deg, var(--color-accent), var(--color-primary-light));
     color: white;
+    box-shadow: 0 8px 25px rgba(var(--color-accent-rgb), 0.5);
+    animation: cardIconBounce 0.6s ease-in-out;
+}
+
+@keyframes cardIconBounce {
+    0%, 100% { transform: scale(1.2) rotate(10deg); }
+    50% { transform: scale(1.25) rotate(10deg); }
 }
 
 .participation-card .card-title {
@@ -1104,8 +1139,15 @@ body.dark-theme .section-separator {
 }
 
 .bento-stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 
+        var(--shadow-lg), 
+        0 0 50px rgba(var(--color-primary-rgb), 0.3);
+    border-color: rgba(var(--color-accent-rgb), 0.3);
+}
+
+.bento-stat-card:active {
+    transform: translateY(-4px) scale(1.01);
 }
 
 .bento-stat-card .stat-value {
@@ -1181,12 +1223,19 @@ body.dark-theme .section-separator {
 }
 
 .bento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        var(--shadow-xl), 
+        0 0 60px rgba(var(--color-primary-rgb), 0.25);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
 }
 
 .bento-card:hover::before {
     transform: scaleX(1);
+}
+
+.bento-card:active {
+    transform: translateY(-4px) scale(1.01);
 }
 
 .bento-icon {
@@ -1204,9 +1253,10 @@ body.dark-theme .section-separator {
 }
 
 .bento-card:hover .bento-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.2) rotate(12deg);
     background: linear-gradient(135deg, var(--color-accent), var(--color-primary-light));
     color: white;
+    box-shadow: 0 8px 30px rgba(var(--color-accent-rgb), 0.5);
 }
 
 .bento-title {
@@ -1271,19 +1321,141 @@ body.dark-theme .section-separator {
     text-shadow: none;
 }
 
-/* Dark Theme Classes */
+/* Dark Theme Classes - Premium Design with Scout Identity */
 body.dark-theme {
-    --color-bg: #0a0a0a;
-    --color-bg-alt: #141414;
-    --color-surface: #1a1a1a;
-    --color-text: #f0f0f0;
-    --color-text-light: #b0b0b0;
-    --color-text-muted: #707070;
-    --color-border: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(30, 30, 30, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    /* Rich Dark Backgrounds */
+    --color-bg: #0a0f0d;
+    --color-bg-alt: #111916;
+    --color-surface: #1a2420;
+    
+    /* Optimized Text Colors for Dark Mode */
+    --color-text: #e8f0ed;
+    --color-text-light: #c5d4cc;
+    --color-text-muted: #8a9b93;
+    
+    /* Enhanced Borders & Glass Effects */
+    --color-border: rgba(26, 107, 53, 0.2);
+    --glass-bg: rgba(26, 36, 32, 0.85);
+    --glass-border: rgba(26, 107, 53, 0.25);
+    
+    /* Keep Scout Green - Brighter for Dark Mode */
+    --color-primary: #1a8d3b;
+    --color-primary-rgb: 26, 141, 59;
+    --color-primary-dark: #156e2f;
+    --color-primary-light: #22a647;
+    --color-primary-glow: rgba(26, 141, 59, 0.5);
+    
+    /* Keep Scout Gold - Brighter for Dark Mode */
+    --color-accent: #ffc107;
+    --color-accent-rgb: 255, 193, 7;
+    --color-accent-dark: #ffa000;
+    --color-accent-glow: rgba(255, 193, 7, 0.6);
+    
+    /* Enhanced Shadows for Dark Mode */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 40px rgba(26, 141, 59, 0.2);
+    --shadow-glow-accent: 0 0 30px rgba(255, 193, 7, 0.35);
 }
 
+/* Additional Dark Mode Styling */
+body.dark-theme .hero-background::before {
+    background: linear-gradient(180deg,
+            rgba(13, 17, 23, 0.6) 0%,
+            rgba(33, 38, 45, 0.8) 50%,
+            rgba(13, 17, 23, 0.9) 100%);
+}
+
+body.dark-theme .video-overlay {
+    background: linear-gradient(180deg,
+            rgba(13, 17, 23, 0.6) 0%,
+            rgba(33, 38, 45, 0.8) 50%,
+            rgba(13, 17, 23, 0.9) 100%);
+}
+
+body.dark-theme .achievement-card,
+body.dark-theme .participation-card,
+body.dark-theme .bento-stat-card,
+body.dark-theme .bento-card,
+body.dark-theme .video-card {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-md);
+}
+
+body.dark-theme .achievement-card:hover,
+body.dark-theme .participation-card:hover,
+body.dark-theme .bento-card:hover,
+body.dark-theme .video-card:hover {
+    box-shadow: 
+        var(--shadow-xl), 
+        0 0 60px rgba(var(--color-primary-rgb), 0.4),
+        0 0 100px rgba(var(--color-accent-rgb), 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+}
+
+body.dark-theme .section-title {
+    color: var(--color-primary-light);
+    text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
+}
+
+body.dark-theme .section-title::after {
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent));
+}
+
+body.dark-theme .contact-info {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group textarea {
+    background: var(--color-bg-alt);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+body.dark-theme .form-group input::placeholder,
+body.dark-theme .form-group textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+body.dark-theme .form-group input:focus,
+body.dark-theme .form-group textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 
+        0 0 0 2px var(--color-surface),
+        0 0 0 4px rgba(var(--color-primary-rgb), 0.4);
+}
+
+body.dark-theme .toast {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+}
+
+body.dark-theme .achievement-title,
+body.dark-theme .participation-card .card-title,
+body.dark-theme .bento-title,
+body.dark-theme .bio-title,
+body.dark-theme .video-title {
+    color: var(--color-primary-light);
+}
+
+body.dark-theme .achievement-year,
+body.dark-theme .participation-card .card-stats {
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.3), rgba(var(--color-accent-rgb), 0.2));
+    color: var(--color-accent);
+}
+
+body.dark-theme .bento-stat-card .stat-value {
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Light Theme */
 body.light-theme {
     --color-bg: #fafafa;
     --color-bg-alt: #f0f2f5;
@@ -1377,6 +1549,13 @@ body.light-theme {
 }
 
 .leader-avatar:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 
+        0 25px 60px rgba(var(--color-primary-rgb), 0.5),
+        0 0 80px rgba(var(--color-accent-rgb), 0.4);
+}
+
+.leader-avatar:active {
     transform: scale(1.05);
 }
 
@@ -1414,13 +1593,19 @@ body.light-theme {
 }
 
 .leader-bio-card:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-5px);
-    border-left: 4px solid var(--color-accent-light);
+    box-shadow: 
+        var(--shadow-xl),
+        0 0 50px rgba(var(--color-primary-rgb), 0.2);
+    transform: translateY(-8px) scale(1.01);
+    border-left: 4px solid var(--color-accent);
 }
 
 [dir="ltr"] .leader-bio-card:hover {
-    border-right: 4px solid var(--color-accent-light);
+    border-right: 4px solid var(--color-accent);
+}
+
+.leader-bio-card:active {
+    transform: translateY(-4px) scale(1);
 }
 
 .bio-content {
@@ -1512,8 +1697,15 @@ body.light-theme {
 }
 
 .video-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-15px) scale(1.04);
+    box-shadow: 
+        var(--shadow-xl), 
+        0 0 60px rgba(var(--color-accent-rgb), 0.3);
+    border-color: rgba(var(--color-accent-rgb), 0.4);
+}
+
+.video-card:active {
+    transform: translateY(-8px) scale(1.02);
 }
 
 .video-thumbnail {
@@ -1558,9 +1750,23 @@ body.light-theme {
 }
 
 .video-card:hover .play-btn i {
-    transform: scale(1.15);
+    transform: scale(1.3) rotate(90deg);
     background: var(--color-accent);
-    box-shadow: 0 12px 40px rgba(var(--color-accent-rgb), 0.5);
+    box-shadow: 
+        0 12px 50px rgba(var(--color-accent-rgb), 0.6),
+        0 0 80px rgba(var(--color-accent-rgb), 0.4);
+    animation: playPulse 1s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+    0%, 100% { 
+        transform: scale(1.3) rotate(90deg);
+        box-shadow: 0 12px 50px rgba(var(--color-accent-rgb), 0.6);
+    }
+    50% { 
+        transform: scale(1.35) rotate(90deg);
+        box-shadow: 0 15px 60px rgba(var(--color-accent-rgb), 0.8);
+    }
 }
 
 .video-title {

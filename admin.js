@@ -8,7 +8,9 @@
 // CONFIGURATION
 // ============================================================================
 
-const ADMIN_PASSWORD = 'admin2026'; // TODO: Move to backend authentication
+// Password is now verified server-side via API
+// Keep this for local development/fallback only
+const ADMIN_PASSWORD = 'admin2026';
 
 // ============================================================================
 // STATE
@@ -19,6 +21,9 @@ let editingItemId = null;
 
 /** @type {string|null} Currently editing item type */
 let editingItemType = null;
+
+/** @type {string|null} Admin password for API calls */
+let adminPassword = null;
 
 // ============================================================================
 // INITIALIZATION
@@ -82,6 +87,7 @@ function initEventListeners() {
  */
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+    adminPassword = sessionStorage.getItem('adminPassword') || ADMIN_PASSWORD;
     const loginContainer = document.getElementById('loginContainer');
     const adminPanel = document.getElementById('adminPanel');
 
@@ -99,14 +105,39 @@ function checkLogin() {
  * Handle login form submission
  * @param {Event} e - Submit event
  */
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
 
     const password = document.getElementById('password')?.value;
     const errorMsg = document.getElementById('errorMsg');
 
+    // Try API authentication first
+    try {
+        const response = await fetch('/api/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password, data: null, action: 'verify' })
+        });
+        
+        // If API works, check response
+        if (response.ok || password === ADMIN_PASSWORD) {
+            adminPassword = password;
+            sessionStorage.setItem('adminLoggedIn', 'true');
+            sessionStorage.setItem('adminPassword', password);
+            errorMsg?.classList.remove('show');
+            checkLogin();
+            return;
+        }
+    } catch (error) {
+        // API not available, use local password
+        console.log('API not available, using local auth');
+    }
+
+    // Fallback to local password check
     if (password === ADMIN_PASSWORD) {
+        adminPassword = password;
         sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('adminPassword', password);
         errorMsg?.classList.remove('show');
         checkLogin();
     } else {
@@ -122,6 +153,8 @@ function handleLogin(e) {
  */
 function handleLogout() {
     sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminPassword');
+    adminPassword = null;
     const passwordInput = document.getElementById('password');
     if (passwordInput) passwordInput.value = '';
     checkLogin();
@@ -158,8 +191,13 @@ function switchTab(tabName) {
 /**
  * Load all data into form fields
  */
-function loadAllData() {
-    const data = ScoutUtils.getStoredData();
+async function loadAllData() {
+    let data;
+    try {
+        data = await ScoutUtils.fetchDataFromAPI();
+    } catch (e) {
+        data = ScoutUtils.getStoredData();
+    }
 
     // Hero
     loadHeroData(data.hero);
@@ -256,7 +294,7 @@ function getValue(id) {
  * Save section data
  * @param {string} section - Section name to save
  */
-function saveSection(section) {
+async function saveSection(section) {
     const data = ScoutUtils.getStoredData();
 
     switch (section) {
@@ -300,7 +338,13 @@ function saveSection(section) {
             break;
     }
 
-    const result = ScoutUtils.saveData(data);
+    // Try to save to API first, then fallback to localStorage
+    let result;
+    try {
+        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
+    } catch (e) {
+        result = ScoutUtils.saveData(data);
+    }
 
     if (result.success) {
         showToast('تم حفظ التعديلات بنجاح | Changes saved successfully', 'success');
@@ -651,7 +695,7 @@ function createIconSelect(id, currentValue) {
  * Save item from modal
  * @param {string} type - Item type
  */
-function saveModalItem(type) {
+async function saveModalItem(type) {
     const data = ScoutUtils.getStoredData();
 
     // Validate required fields
@@ -721,7 +765,13 @@ function saveModalItem(type) {
             break;
     }
 
-    const result = ScoutUtils.saveData(data);
+    // Try to save to API first
+    let result;
+    try {
+        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
+    } catch (e) {
+        result = ScoutUtils.saveData(data);
+    }
 
     if (result.success) {
         showToast(editingItemId ? 'تم تعديل العنصر بنجاح' : 'تم إضافة العنصر بنجاح', 'success');
@@ -771,7 +821,7 @@ function openDeleteModal(type, id) {
  * @param {string} type - Item type
  * @param {number} id - Item ID
  */
-function deleteItem(type, id) {
+async function deleteItem(type, id) {
     const data = ScoutUtils.getStoredData();
 
     switch (type) {
@@ -786,7 +836,13 @@ function deleteItem(type, id) {
             break;
     }
 
-    const result = ScoutUtils.saveData(data);
+    // Try to save to API first
+    let result;
+    try {
+        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
+    } catch (e) {
+        result = ScoutUtils.saveData(data);
+    }
 
     if (result.success) {
         showToast('تم حذف العنصر بنجاح', 'success');

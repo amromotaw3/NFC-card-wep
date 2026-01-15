@@ -1,0 +1,16 @@
+{
+  "name": "scout-website",
+  "version": "1.0.0",
+  "description": "فرقة عبدالرحمن بن القاسم الكشفية - Scout Team Website",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@vercel/kv": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
