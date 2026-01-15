@@ -1,15 +1,13 @@
 /**
  * NFC Card Web - Admin Panel Script
  * Scout Team Website - Admin Dashboard Logic
- * @version 2.0.0
+ * @version 3.0.0 - Simplified
  */
 
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
 
-// Password is now verified server-side via API
-// Keep this for local development/fallback only
 const ADMIN_PASSWORD = 'admin2026';
 
 // ============================================================================
@@ -21,9 +19,6 @@ let editingItemId = null;
 
 /** @type {string|null} Currently editing item type */
 let editingItemType = null;
-
-/** @type {string|null} Admin password for API calls */
-let adminPassword = null;
 
 // ============================================================================
 // INITIALIZATION
@@ -87,7 +82,6 @@ function initEventListeners() {
  */
 function checkLogin() {
     const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
-    adminPassword = sessionStorage.getItem('adminPassword') || ADMIN_PASSWORD;
     const loginContainer = document.getElementById('loginContainer');
     const adminPanel = document.getElementById('adminPanel');
 
@@ -111,33 +105,8 @@ async function handleLogin(e) {
     const password = document.getElementById('password')?.value;
     const errorMsg = document.getElementById('errorMsg');
 
-    // Try API authentication first
-    try {
-        const response = await fetch('/api/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password, data: null, action: 'verify' })
-        });
-        
-        // If API works, check response
-        if (response.ok || password === ADMIN_PASSWORD) {
-            adminPassword = password;
-            sessionStorage.setItem('adminLoggedIn', 'true');
-            sessionStorage.setItem('adminPassword', password);
-            errorMsg?.classList.remove('show');
-            checkLogin();
-            return;
-        }
-    } catch (error) {
-        // API not available, use local password
-        console.log('API not available, using local auth');
-    }
-
-    // Fallback to local password check
     if (password === ADMIN_PASSWORD) {
-        adminPassword = password;
         sessionStorage.setItem('adminLoggedIn', 'true');
-        sessionStorage.setItem('adminPassword', password);
         errorMsg?.classList.remove('show');
         checkLogin();
     } else {
@@ -153,8 +122,6 @@ async function handleLogin(e) {
  */
 function handleLogout() {
     sessionStorage.removeItem('adminLoggedIn');
-    sessionStorage.removeItem('adminPassword');
-    adminPassword = null;
     const passwordInput = document.getElementById('password');
     if (passwordInput) passwordInput.value = '';
     checkLogin();
@@ -338,13 +305,8 @@ async function saveSection(section) {
             break;
     }
 
-    // Try to save to API first, then fallback to localStorage
-    let result;
-    try {
-        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
-    } catch (e) {
-        result = ScoutUtils.saveData(data);
-    }
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast('تم حفظ التعديلات بنجاح | Changes saved successfully', 'success');
@@ -765,13 +727,8 @@ async function saveModalItem(type) {
             break;
     }
 
-    // Try to save to API first
-    let result;
-    try {
-        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
-    } catch (e) {
-        result = ScoutUtils.saveData(data);
-    }
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast(editingItemId ? 'تم تعديل العنصر بنجاح' : 'تم إضافة العنصر بنجاح', 'success');
@@ -836,18 +793,17 @@ async function deleteItem(type, id) {
             break;
     }
 
-    // Try to save to API first
-    let result;
-    try {
-        result = await ScoutUtils.saveDataToAPI(data, adminPassword);
-    } catch (e) {
-        result = ScoutUtils.saveData(data);
-    }
+    // Save to localStorage
+    const result = ScoutUtils.saveData(data);
 
     if (result.success) {
         showToast('تم حذف العنصر بنجاح', 'success');
         closeModal();
         loadAllData();
+    } else {
+        showToast(result.error, 'error');
+    }
+}
     } else {
         showToast(result.error, 'error');
     }

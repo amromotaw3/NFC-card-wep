@@ -506,16 +506,11 @@ function animateCounter(element) {
 // ============================================================================
 
 /**
- * Load and render all dynamic content from API/storage
+ * Load and render all dynamic content from localStorage
  */
 async function loadDynamicContent() {
-    // Try to fetch from API first, fallback to localStorage
-    let data;
-    try {
-        data = await ScoutUtils.fetchDataFromAPI();
-    } catch (e) {
-        data = ScoutUtils.getStoredData();
-    }
+    // Get data from localStorage
+    const data = ScoutUtils.getStoredData();
 
     renderHeroSection(data.hero);
     renderAchievements(data.achievements);
