@@ -804,10 +804,6 @@ async function deleteItem(type, id) {
         showToast(result.error, 'error');
     }
 }
-    } else {
-        showToast(result.error, 'error');
-    }
-}
 
 /**
  * Close modal
