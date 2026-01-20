@@ -1,7 +1,7 @@
 /**
- * NFC Card Web - Main Application Script
+ * NFC Card Web - Main Application Script (Simplified Static Version)
  * Scout Team Website - Main Page Logic
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 // ============================================================================
@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initScrollEffects();
     initContactForm();
-    loadDynamicContent();
-    setupStorageListener();
     setCurrentYear();
     initThemeToggle();
 });
@@ -41,9 +39,8 @@ function initTheme() {
             // Use saved preference
             applyTheme(savedTheme);
         } else {
-            // Check system preference
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark ? 'dark' : 'light');
+            // Default to light theme
+            applyTheme('light');
         }
     } catch (e) {
         console.warn('Could not read theme preference:', e);
@@ -52,7 +49,7 @@ function initTheme() {
 }
 
 /**
- * Apply theme to document with smooth transition
+ * Apply theme to document
  * @param {string} theme - 'dark' or 'light'
  */
 function applyTheme(theme) {
@@ -60,25 +57,16 @@ function applyTheme(theme) {
     const themeIconLight = document.getElementById('themeIconLight');
     const themeIconDark = document.getElementById('themeIconDark');
 
-    // Add transition class for smooth theme change
-    body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-
     if (theme === 'dark') {
         body.classList.remove('light-theme');
         body.classList.add('dark-theme');
         themeIconLight?.classList.add('hidden');
         themeIconDark?.classList.remove('hidden');
-        
-        // Update meta theme color for mobile browsers
-        updateMetaThemeColor('#0a0f0d');
     } else {
         body.classList.remove('dark-theme');
         body.classList.add('light-theme');
         themeIconLight?.classList.remove('hidden');
         themeIconDark?.classList.add('hidden');
-        
-        // Update meta theme color for mobile browsers
-        updateMetaThemeColor('#fafafa');
     }
 
     // Save preference
@@ -87,27 +75,6 @@ function applyTheme(theme) {
     } catch (e) {
         console.warn('Could not save theme preference:', e);
     }
-    
-    // Remove transition after animation completes
-    setTimeout(() => {
-        body.style.transition = '';
-    }, 300);
-}
-
-/**
- * Update meta theme color for mobile browsers
- * @param {string} color - Theme color
- */
-function updateMetaThemeColor(color) {
-    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    
-    if (!metaThemeColor) {
-        metaThemeColor = document.createElement('meta');
-        metaThemeColor.name = 'theme-color';
-        document.head.appendChild(metaThemeColor);
-    }
-    
-    metaThemeColor.content = color;
 }
 
 /**
@@ -185,8 +152,6 @@ function applyLanguage() {
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
     applyLanguage();
-    // Re-render dynamic content with new language
-    loadDynamicContent();
 }
 
 // Language toggle button event
@@ -333,7 +298,6 @@ function initActiveNavHighlight() {
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            // Using window.scrollY instead of deprecated pageYOffset
             if (window.scrollY >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
@@ -387,7 +351,6 @@ function initGlassmorphicHeader() {
 
     function updateHeader() {
         const scrollY = window.scrollY;
-
         lastScrollY = scrollY;
         ticking = false;
     }
@@ -502,388 +465,6 @@ function animateCounter(element) {
 }
 
 // ============================================================================
-// DYNAMIC CONTENT RENDERING
-// ============================================================================
-
-/**
- * Load and render all dynamic content
- */
-function loadDynamicContent() {
-    // Get data from localStorage
-    const data = ScoutUtils.getStoredData();
-
-    renderHeroSection(data.hero);
-    renderAchievements(data.achievements);
-    renderParticipation(data.participation);
-    renderAboutSection(data.about);
-    renderLeaderSection(data.leader);
-    renderVideos(data.videos);
-    renderContactInfo(data.contact);
-
-    // Re-apply language after rendering
-    applyLanguage();
-
-    // Re-initialize observer for new elements
-    initIntersectionObserver();
-}
-
-/**
- * Render hero section content
- * @param {Object} heroData - Hero section data
- */
-function renderHeroSection(heroData) {
-    if (!heroData) return;
-
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-
-    if (heroTitle) {
-        heroTitle.dataset.ar = heroData.titleAr || '';
-        heroTitle.dataset.en = heroData.titleEn || '';
-        heroTitle.textContent = currentLanguage === 'ar' ? heroData.titleAr : heroData.titleEn;
-    }
-
-    if (heroSubtitle) {
-        heroSubtitle.dataset.ar = heroData.subtitleAr || '';
-        heroSubtitle.dataset.en = heroData.subtitleEn || '';
-        heroSubtitle.textContent = currentLanguage === 'ar' ? heroData.subtitleAr : heroData.subtitleEn;
-    }
-}
-
-/**
- * Render achievements grid
- * @param {Array} achievements - Achievements data array
- */
-function renderAchievements(achievements) {
-    const grid = document.getElementById('achievementsGrid');
-    const emptyState = document.getElementById('achievementsEmpty');
-
-    if (!grid) return;
-
-    // Clear existing content
-    grid.innerHTML = '';
-
-    if (!achievements || achievements.length === 0) {
-        grid.classList.add('hidden');
-        emptyState?.classList.remove('hidden');
-        return;
-    }
-
-    grid.classList.remove('hidden');
-    emptyState?.classList.add('hidden');
-
-    // Use DocumentFragment for better performance
-    const fragment = document.createDocumentFragment();
-
-    achievements.forEach((item, index) => {
-        const card = createAchievementCard(item, index);
-        fragment.appendChild(card);
-    });
-
-    grid.appendChild(fragment);
-}
-
-/**
- * Create achievement card element safely
- * @param {Object} item - Achievement data
- * @param {number} index - Card index for animation delay
- * @returns {HTMLElement} Achievement card element
- */
-function createAchievementCard(item, index) {
-    const card = document.createElement('div');
-    card.className = 'achievement-card animate-on-scroll';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    // Year
-    const yearDiv = document.createElement('div');
-    yearDiv.className = 'achievement-year';
-    yearDiv.textContent = item.year || '';
-    card.appendChild(yearDiv);
-
-    // Icon
-    const iconDiv = document.createElement('div');
-    iconDiv.className = 'achievement-icon';
-    const icon = document.createElement('i');
-    icon.className = item.icon || 'fas fa-trophy';
-    iconDiv.appendChild(icon);
-    card.appendChild(iconDiv);
-
-    // Title
-    const titleH3 = document.createElement('h3');
-    titleH3.className = 'achievement-title';
-    titleH3.dataset.ar = item.titleAr || '';
-    titleH3.dataset.en = item.titleEn || '';
-    titleH3.textContent = currentLanguage === 'ar' ? (item.titleAr || '') : (item.titleEn || '');
-    card.appendChild(titleH3);
-
-    // Description
-    const descP = document.createElement('p');
-    descP.className = 'achievement-desc';
-    descP.dataset.ar = item.descAr || '';
-    descP.dataset.en = item.descEn || '';
-    descP.textContent = currentLanguage === 'ar' ? (item.descAr || '') : (item.descEn || '');
-    card.appendChild(descP);
-
-    return card;
-}
-
-/**
- * Render participation grid
- * @param {Array} participation - Participation data array
- */
-function renderParticipation(participation) {
-    const grid = document.getElementById('participationGrid');
-    const emptyState = document.getElementById('participationEmpty');
-
-    if (!grid) return;
-
-    grid.innerHTML = '';
-
-    if (!participation || participation.length === 0) {
-        grid.classList.add('hidden');
-        emptyState?.classList.remove('hidden');
-        return;
-    }
-
-    grid.classList.remove('hidden');
-    emptyState?.classList.add('hidden');
-
-    const fragment = document.createDocumentFragment();
-
-    participation.forEach((item, index) => {
-        const card = createParticipationCard(item, index);
-        fragment.appendChild(card);
-    });
-
-    grid.appendChild(fragment);
-}
-
-/**
- * Create participation card element safely
- * @param {Object} item - Participation data
- * @param {number} index - Card index for animation delay
- * @returns {HTMLElement} Participation card element
- */
-function createParticipationCard(item, index) {
-    const card = document.createElement('div');
-    card.className = 'participation-card animate-on-scroll';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    // Icon
-    const iconDiv = document.createElement('div');
-    iconDiv.className = 'card-icon';
-    const icon = document.createElement('i');
-    icon.className = item.icon || 'fas fa-handshake';
-    iconDiv.appendChild(icon);
-    card.appendChild(iconDiv);
-
-    // Title
-    const titleH3 = document.createElement('h3');
-    titleH3.className = 'card-title';
-    titleH3.dataset.ar = item.titleAr || '';
-    titleH3.dataset.en = item.titleEn || '';
-    titleH3.textContent = currentLanguage === 'ar' ? (item.titleAr || '') : (item.titleEn || '');
-    card.appendChild(titleH3);
-
-    // Description
-    const descP = document.createElement('p');
-    descP.className = 'card-desc';
-    descP.dataset.ar = item.descAr || '';
-    descP.dataset.en = item.descEn || '';
-    descP.textContent = currentLanguage === 'ar' ? (item.descAr || '') : (item.descEn || '');
-    card.appendChild(descP);
-
-    // Stats
-    const statsDiv = document.createElement('div');
-    statsDiv.className = 'card-stats';
-    statsDiv.dataset.ar = item.statsAr || '';
-    statsDiv.dataset.en = item.statsEn || '';
-    statsDiv.textContent = currentLanguage === 'ar' ? (item.statsAr || '') : (item.statsEn || '');
-    card.appendChild(statsDiv);
-
-    return card;
-}
-
-/**
- * Render about section content
- * @param {Object} aboutData - About section data
- */
-function renderAboutSection(aboutData) {
-    if (!aboutData) return;
-
-    // Mission
-    const missionText = document.getElementById('missionText');
-    if (missionText) {
-        missionText.dataset.ar = aboutData.missionAr || '';
-        missionText.dataset.en = aboutData.missionEn || '';
-        missionText.textContent = currentLanguage === 'ar' ? aboutData.missionAr : aboutData.missionEn;
-    }
-
-    // Values
-    const valuesText = document.getElementById('valuesText');
-    if (valuesText) {
-        valuesText.dataset.ar = aboutData.valuesAr || '';
-        valuesText.dataset.en = aboutData.valuesEn || '';
-        valuesText.textContent = currentLanguage === 'ar' ? aboutData.valuesAr : aboutData.valuesEn;
-    }
-
-    // Member count
-    const memberCount = document.getElementById('memberCountValue');
-    if (memberCount) {
-        memberCount.textContent = aboutData.memberCount || '150+';
-    }
-
-    // Established year
-    const establishedYear = document.getElementById('establishedYearValue');
-    if (establishedYear) {
-        establishedYear.textContent = aboutData.establishedYear || '2015';
-    }
-}
-
-/**
- * Render leader section content
- * @param {Object} leaderData - Leader section data
- */
-function renderLeaderSection(leaderData) {
-    if (!leaderData) return;
-
-    // Leader name
-    const nameEl = document.querySelector('#leader .leader-info h3');
-    if (nameEl) {
-        nameEl.dataset.ar = leaderData.nameAr || 'القائد الكشفي';
-        nameEl.dataset.en = leaderData.nameEn || 'Scout Leader';
-        nameEl.textContent = currentLanguage === 'ar' ? (leaderData.nameAr || 'القائد الكشفي') : (leaderData.nameEn || 'Scout Leader');
-    }
-    
-    // Leader bio
-    const bioEl = document.getElementById('leaderBio');
-    if (bioEl) {
-        bioEl.dataset.ar = leaderData.bioAr || '';
-        bioEl.dataset.en = leaderData.bioEn || '';
-        bioEl.textContent = currentLanguage === 'ar' ? leaderData.bioAr : leaderData.bioEn;
-    }
-}
-
-/**
- * Render videos grid
- * @param {Array} videos - Videos data array
- */
-function renderVideos(videos) {
-    const grid = document.getElementById('videosGrid');
-    const emptyState = document.getElementById('videosEmpty');
-
-    if (!grid) return;
-
-    grid.innerHTML = '';
-
-    if (!videos || videos.length === 0) {
-        grid.classList.add('hidden');
-        emptyState?.classList.remove('hidden');
-        return;
-    }
-
-    grid.classList.remove('hidden');
-    emptyState?.classList.add('hidden');
-
-    const fragment = document.createDocumentFragment();
-
-    videos.forEach((item, index) => {
-        const card = createVideoCard(item, index);
-        fragment.appendChild(card);
-    });
-
-    grid.appendChild(fragment);
-}
-
-/**
- * Create video card element safely
- * @param {Object} item - Video data
- * @param {number} index - Card index for animation delay
- * @returns {HTMLElement} Video card element
- */
-function createVideoCard(item, index) {
-    const card = document.createElement('div');
-    card.className = 'video-card animate-on-scroll';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    // Thumbnail - using video thumbnail from video URL
-    const thumbDiv = document.createElement('div');
-    thumbDiv.className = 'video-thumbnail';
-    
-    // Extract YouTube thumbnail from video URL
-    let thumbnailUrl = '';
-    if (item.url) {
-        // Check if it's a YouTube URL
-        const youtubeMatch = item.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
-        if (youtubeMatch) {
-            thumbnailUrl = `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`;
-        }
-    }
-    
-    // Fallback to provided thumbnail if no YouTube URL or extraction failed
-    if (!thumbnailUrl && item.thumbnail) {
-        thumbnailUrl = ScoutUtils.sanitizeHTML(item.thumbnail);
-    }
-    
-    thumbDiv.style.backgroundImage = `url('${thumbnailUrl}')`;
-
-    // Play button
-    const playLink = document.createElement('a');
-    playLink.href = item.url || '#';
-    playLink.target = '_blank';
-    playLink.rel = 'noopener noreferrer';
-    playLink.className = 'play-btn';
-    playLink.setAttribute('aria-label', currentLanguage === 'ar' ? 'تشغيل الفيديو' : 'Play video');
-
-    const playIcon = document.createElement('i');
-    playIcon.className = 'fas fa-play';
-    playLink.appendChild(playIcon);
-    thumbDiv.appendChild(playLink);
-    card.appendChild(thumbDiv);
-
-    // Title
-    const titleH3 = document.createElement('h3');
-    titleH3.className = 'video-title';
-    titleH3.dataset.ar = item.titleAr || '';
-    titleH3.dataset.en = item.titleEn || '';
-    titleH3.textContent = currentLanguage === 'ar' ? (item.titleAr || '') : (item.titleEn || '');
-    card.appendChild(titleH3);
-
-    return card;
-}
-
-/**
- * Render contact info
- * @param {Object} contactData - Contact data
- */
-function renderContactInfo(contactData) {
-    if (!contactData) return;
-
-    // Email
-    const emailEl = document.getElementById('contactEmail');
-    if (emailEl) {
-        emailEl.textContent = contactData.email || '';
-        emailEl.href = `mailto:${contactData.email || ''}`;
-    }
-
-    // Phone
-    const phoneEl = document.getElementById('contactPhone');
-    if (phoneEl) {
-        phoneEl.textContent = contactData.phone || '';
-        const cleanPhone = (contactData.phone || '').replace(/\s/g, '');
-        phoneEl.href = `tel:${cleanPhone}`;
-    }
-
-    // Address
-    const addressEl = document.getElementById('contactAddress');
-    if (addressEl) {
-        addressEl.dataset.ar = contactData.addressAr || '';
-        addressEl.dataset.en = contactData.addressEn || '';
-        addressEl.textContent = currentLanguage === 'ar' ? contactData.addressAr : contactData.addressEn;
-    }
-}
-
-// ============================================================================
 // CONTACT FORM
 // ============================================================================
 
@@ -933,8 +514,6 @@ async function handleContactFormSubmit(e) {
         // Submit form using Formspree.io
         const formData = new FormData(form);
         
-        // Submit using fetch to Formspree endpoint
-        // First try the fetch API approach
         let response;
         try {
             response = await fetch('https://formspree.io/f/xojjvknq', {
@@ -945,18 +524,16 @@ async function handleContactFormSubmit(e) {
                 },
             });
         } catch (fetchError) {
-            // If fetch fails, show error message
             showToast(
                 currentLanguage === 'ar'
                     ? 'حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى'
                     : 'Connection error. Please try again',
                 'error'
             );
-            return; // Exit since submission failed
+            return;
         }
         
         if (response.ok) {
-            // Show success message
             showToast(
                 currentLanguage === 'ar'
                     ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً'
@@ -967,7 +544,6 @@ async function handleContactFormSubmit(e) {
             // Reset form
             form.reset();
         } else {
-            // Handle error response
             const errorData = await response.json();
             throw new Error(errorData.error || 'Submission failed');
         }
@@ -1147,98 +723,8 @@ function setCurrentYear() {
     }
 }
 
-/**
- * Listen for storage changes from admin panel
- */
-function setupStorageListener() {
-    window.addEventListener('storage', (e) => {
-        if (e.key === ScoutUtils.STORAGE_KEY) {
-            loadDynamicContent();
-        }
-    });
-}
-
 // ============================================================================
 // EXPOSE FOR GLOBAL ACCESS
 // ============================================================================
 
 window.showToast = showToast;
-window.loadDynamicContent = loadDynamicContent;
-
-// Helper function to refresh about section data
-window.refreshAboutData = function() {
-    // Force reload data from storage
-    const data = ScoutUtils.getStoredData();
-    renderAboutSection(data.about);
-    console.log('About section data refreshed');
-};
-
-// Helper function to update about data directly
-window.updateAboutData = function(memberCount, establishedYear) {
-    const data = ScoutUtils.getStoredData();
-    if (memberCount !== undefined) data.about.memberCount = memberCount;
-    if (establishedYear !== undefined) data.about.establishedYear = establishedYear;
-    
-    // Save to localStorage
-    ScoutUtils.saveData(data);
-    
-    // Refresh display
-    renderAboutSection(data.about);
-    console.log('About data updated:', { memberCount, establishedYear });
-};
-
-// Debug function to check current stored data
-window.checkAboutData = function() {
-    const data = ScoutUtils.getStoredData();
-    console.log('Current about data:', data.about);
-    console.log('Member count displayed:', document.getElementById('memberCountValue')?.textContent);
-    console.log('Established year displayed:', document.getElementById('establishedYearValue')?.textContent);
-    return data.about;
-};
-
-// Function to load data from remote API with fallback to local storage
-window.loadRemoteData = async function() {
-    try {
-        if (ScoutUtils.REMOTE_API_URL) {
-            const response = await fetch(ScoutUtils.REMOTE_API_URL);
-            if (response.ok) {
-                const remoteData = await response.json();
-                // Save remote data to local storage for offline access
-                ScoutUtils.saveData(remoteData);
-                return remoteData;
-            }
-        }
-    } catch (error) {
-        console.warn('Failed to load remote data, using local storage:', error);
-    }
-    
-    // Fallback to local storage
-    return ScoutUtils.getStoredData();
-};
-
-// Function to save data to remote API
-window.saveRemoteData = async function(data) {
-    try {
-        if (ScoutUtils.REMOTE_API_URL) {
-            const response = await fetch(ScoutUtils.REMOTE_API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            if (response.ok) {
-                console.log('Data saved to remote server successfully');
-                return { success: true };
-            } else {
-                throw new Error('Server responded with error');
-            }
-        }
-    } catch (error) {
-        console.warn('Failed to save to remote server, saving locally only:', error);
-    }
-    
-    // Fallback to local storage
-    return ScoutUtils.saveData(data);
-};
