@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     setCurrentYear();
     initThemeToggle();
+    initVisitCounter();
+    initSplashScreen();
 });
 
 // ============================================================================
@@ -511,12 +513,12 @@ async function handleContactFormSubmit(e) {
     if (btnLoading) btnLoading.classList.remove('hidden');
 
     try {
-        // Submit form using Formspree.io
+        // Submit form using FormSubmit.co (AJAX mode)
         const formData = new FormData(form);
-        
+
         let response;
         try {
-            response = await fetch('https://formspree.io/f/xojjvknq', {
+            response = await fetch('https://formsubmit.co/ajax/scouts.th.abdrahman.bin.qasim@gmail.com', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -532,7 +534,7 @@ async function handleContactFormSubmit(e) {
             );
             return;
         }
-        
+
         if (response.ok) {
             showToast(
                 currentLanguage === 'ar'
@@ -548,6 +550,7 @@ async function handleContactFormSubmit(e) {
             throw new Error(errorData.error || 'Submission failed');
         }
     } catch (error) {
+        console.error('Form submission error:', error);
         showToast(
             currentLanguage === 'ar'
                 ? 'حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى'
@@ -722,6 +725,132 @@ function setCurrentYear() {
         yearElement.textContent = new Date().getFullYear();
     }
 }
+
+// ============================================================================
+// VISIT COUNTER (Global via CounterAPI)
+// ============================================================================
+
+/**
+ * Initialize and update global visit counter
+ */
+async function initVisitCounter() {
+    const visitorElement = document.getElementById('visitorsCountValue');
+    if (!visitorElement) return;
+
+    try {
+        // We use counterapi.dev as a reliable free alternative
+        // Namespace: scout-team-abdulrahman, Key: visits
+        const response = await fetch('https://api.counterapi.dev/v1/scout-team-abdulrahman/visits/up');
+
+        if (response.ok) {
+            const data = await response.json();
+            const count = data.count;
+
+            // Set value and trigger animation if needed
+            visitorElement.textContent = count.toLocaleString();
+
+            // Re-trigger counter animation for this specific element
+            if (typeof animateCounter === 'function') {
+                animateCounter(visitorElement);
+            }
+        } else {
+            // Fallback to a placeholder if API fails
+            visitorElement.textContent = '1,250+';
+        }
+    } catch (error) {
+        console.warn('Visit counter error:', error);
+        visitorElement.textContent = '1,250+';
+    }
+}
+
+// ============================================================================
+// SPLASH SCREEN LOGIC
+// ============================================================================
+
+/**
+ * Initialize and handle the splash screen visibility
+ */
+function initSplashScreen() {
+    const splash = document.getElementById('splashScreen');
+    const particlesContainer = document.getElementById('splashParticles');
+    const closeBtn = document.getElementById('closeSplash');
+
+    if (!splash) return;
+
+    // Check if user has already seen the splash screen in this session
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
+
+    if (hasSeenSplash) {
+        splash.style.display = 'none';
+        return;
+    }
+
+    // Create particles dynamically
+    createSplashParticles(particlesContainer);
+
+    // Sequence the animation
+    document.body.style.overflow = 'hidden';
+
+    // Step 1: Show Logo
+    setTimeout(() => {
+        splash.classList.add('logo-visible');
+    }, 400);
+
+    // Step 2: Move Logo Up
+    setTimeout(() => {
+        splash.classList.add('logo-up');
+    }, 1500);
+
+    // Step 3: Show Content
+    setTimeout(() => {
+        splash.classList.add('content-visible');
+    }, 2000);
+
+    // Handle button click
+    closeBtn?.addEventListener('click', () => {
+        splash.classList.add('fade-out');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('hasSeenSplash', 'true');
+
+        // Remove from DOM after transition
+        setTimeout(() => {
+            splash.remove();
+        }, 1200);
+    });
+}
+
+/**
+ * Create random floating particles for the splash background
+ * @param {HTMLElement} container 
+ */
+function createSplashParticles(container) {
+    if (!container) return;
+
+    const particleCount = 20;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random positions
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+
+        // Random movement distances
+        const moveX = (Math.random() - 0.5) * 400;
+        const moveY = (Math.random() - 0.5) * 400;
+        particle.style.setProperty('--move-x', `${moveX}px`);
+        particle.style.setProperty('--move-y', `${moveY}px`);
+
+        // Random delays and duration
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+
+        container.appendChild(particle);
+    }
+}
+
 
 // ============================================================================
 // EXPOSE FOR GLOBAL ACCESS
