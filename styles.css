@@ -95,6 +95,22 @@
     --z-toast: 1100;
 }
 
+/* ============================================================================
+   SCROLL ENTRANCE ANIMATIONS (Premium Feel)
+   ============================================================================ */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Dark Mode Variables */
 .dark-theme {
     --color-bg: #0f1419;
@@ -2206,8 +2222,16 @@ body.light-theme {
 }
 
 .splash-screen.fade-out {
-    transform: translateY(-100%);
     opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.splash-screen.fade-out .splash-card {
+    transform: scale(1.1);
+    filter: blur(10px);
+    opacity: 0;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, filter 0.8s ease-in-out;
 }
 
 .splash-card-container {
@@ -2232,11 +2256,24 @@ body.light-theme {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Horizontally center ALL children */
     justify-content: center;
-    /* Vertically center ALL content */
     min-height: 580px;
     width: 100%;
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+    animation: cardEntrance 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes cardEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px) rotateX(-10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotateX(0);
+    }
 }
 
 /* Professional Black Backdrop - FIXED: Darker as requested */
@@ -2265,6 +2302,21 @@ body.light-theme {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: logoElastic 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+}
+
+@keyframes logoElastic {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-15deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
 }
 
 .splash-logo {
@@ -2291,6 +2343,9 @@ body.light-theme {
     line-height: 1.4;
     text-align: center;
     width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out 1s forwards;
 }
 
 .splash-card-info {
@@ -2302,6 +2357,21 @@ body.light-theme {
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 18px;
     width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .splash-description {
@@ -2324,6 +2394,21 @@ body.light-theme {
     box-shadow: 0 10px 25px rgba(255, 193, 7, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    animation: btnPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.5s forwards;
+}
+
+@keyframes btnPop {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .splash-btn:hover {
