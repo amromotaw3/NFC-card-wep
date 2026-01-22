@@ -806,7 +806,7 @@ function initSplashScreen() {
         splash.classList.add('content-visible');
     }, 2000);
 
-    // Handle button click
+// Handle button click (Splash Screen)
     closeBtn?.addEventListener('click', () => {
         splash.classList.add('fade-out');
         document.body.style.overflow = '';
@@ -817,6 +817,67 @@ function initSplashScreen() {
             splash.remove();
         }, 1200);
     });
+
+    // Handle vCard and Share buttons
+    document.getElementById('saveContactBtn')?.addEventListener('click', downloadVCard);
+    document.getElementById('shareBtnTop')?.addEventListener('click', shareWebsite);
+}
+
+/**
+ * Download vCard for the scout leader
+ */
+function downloadVCard() {
+    const vcard = 'BEGIN:VCARD\n' +
+        'VERSION:3.0\n' +
+        'FN:القائد/ فريد عثمان\n' +
+        'ORG:فرقة كشافة نادي الخليج\n' +
+        'TEL;TYPE=CELL,VOICE:+966500000000\n' +
+        'EMAIL:leader@gulfscouts.com\n' +
+        'URL:https://gulfscouts.nfc\n' +
+        'END:VCARD';
+
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'Farid_Osman_Contact.vcf');
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    }, 100);
+
+    if (window.showToast) {
+        showToast('جاري تحميل بيانات الاتصال...', 'success');
+    }
+}
+
+/**
+ * Share website using Web Share API
+ */
+async function shareWebsite() {
+    const shareData = {
+        title: 'فرقة كشافة نادي الخليج',
+        text: 'تعرف على فرقة كشافة نادي الخليج وإنجازاتها الرائدة.',
+        url: window.location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            // Fallback: Copy to clipboard
+            await navigator.clipboard.writeText(window.location.href);
+            if (window.showToast) {
+                showToast('تم نسخ رابط الموقع للمشاركة', 'info');
+            }
+        }
+    } catch (err) {
+        console.error('Error sharing:', err);
+    }
 }
 
 /**
@@ -857,3 +918,5 @@ function createSplashParticles(container) {
 // ============================================================================
 
 window.showToast = showToast;
+window.downloadVCard = downloadVCard;
+window.shareWebsite = shareWebsite;
