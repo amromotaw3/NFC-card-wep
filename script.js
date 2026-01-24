@@ -829,18 +829,18 @@ function initSplashScreen() {
 function downloadVCard() {
     const vcard = 'BEGIN:VCARD\n' +
         'VERSION:3.0\n' +
-        'FN:القائد/ فريد عثمان\n' +
-        'ORG:فرقة كشافة نادي الخليج\n' +
-        'TEL;TYPE=CELL,VOICE:+966500000000\n' +
-        'EMAIL:leader@gulfscouts.com\n' +
-        'URL:https://gulfscouts.nfc\n' +
+        'FN:القائد/ عبدالرحمن الرميح\n' + // Correct Name
+        'ORG:فرقة عبدالرحمن بن القاسم الكشفية\n' + // Correct Organization
+        'TEL;TYPE=CELL,VOICE:+966563055595\n' + // Correct Phone
+        'EMAIL:scouts.th.abdrahman.bin.qasim@gmail.com\n' + // Correct Email
+        'ADR;TYPE=WORK:;;المملكة العربية السعودية - المنطقة الشرقية - الخبر;;;;\n' + // Correct Address
         'END:VCARD';
 
     const blob = new Blob([vcard], { type: 'text/vcard' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'Farid_Osman_Contact.vcf');
+    link.setAttribute('download', 'Abdulrahman_Al_Rumaih_Contact.vcf');
     document.body.appendChild(link);
     link.click();
     

@@ -589,13 +589,7 @@
                             الإنسان هو جوهر العمل الكشفي، وأن أثر القائد الحقيقي يظهر فيما يزرعه في نفوس من يعمل
                             معهم.
                         </p>
-                        <div class="leader-actions animate-on-scroll" style="transition-delay: 0.3s;">
-                            <button id="saveContactBtn" class="btn btn-primary vcard-btn">
-                                <i class="fas fa-user-plus"></i>
-                                <span data-ar="حفظ في جهات الاتصال" data-en="Save to Contacts">حفظ في جهات
-                                    الاتصال</span>
-                            </button>
-                        </div>
+                        <!-- Save Contact button moved to contact section -->
                     </div>
                 </div>
             </div>
@@ -791,10 +785,16 @@
                     </button>
 
                     <div class="direct-contact-buttons">
-                        <a href="tel:+966563055595" class="direct-btn call-btn">
-                            <i class="fas fa-phone-alt"></i>
-                            <span data-ar="اتصال مباشر" data-en="Direct Call">اتصال مباشر</span>
-                        </a>
+                        <div class="direct-buttons-row">
+                            <a href="tel:+966563055595" class="direct-btn call-btn">
+                                <i class="fas fa-phone-alt"></i>
+                                <span data-ar="اتصال مباشر" data-en="Direct Call">اتصال مباشر</span>
+                            </a>
+                            <button type="button" id="saveContactBtn" class="direct-btn vcard-btn-direct">
+                                <i class="fas fa-user-plus"></i>
+                                <span data-ar="حفظ الاتصال" data-en="Save Contact">حفظ الاتصال</span>
+                            </button>
+                        </div>
                         <a href="https://wa.me/966563055595" class="direct-btn whatsapp-btn" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                             <span data-ar="واتساب" data-en="WhatsApp">واتساب</span>
