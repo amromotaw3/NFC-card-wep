@@ -569,7 +569,7 @@ img {
 .hero-background {
     position: absolute;
     inset: 0;
-    background: url('banner.jpg') center/cover no-repeat;
+    background: url('src/banner.jpg') center/cover no-repeat;
     z-index: 0;
 }
 
@@ -2300,7 +2300,7 @@ body.light-theme {
 }
 
 .splash-card {
-    background-image: url('card.JPG');
+    background-image: url('src/card.JPG');
     background-size: cover;
     background-position: center;
     border-radius: 25px;
@@ -2646,4 +2646,68 @@ body.light-theme {
     font-size: var(--font-size-xs);
     color: var(--color-text-light);
     line-height: 1.5;
+}
+
+/* ============================================================================
+   FOOTER & PARTNERS
+   ============================================================================ */
+.footer {
+    background: linear-gradient(135deg, var(--color-primary-dark), #09391b);
+    color: white;
+    padding: var(--spacing-2xl) 0;
+    margin-top: 0;
+    position: relative;
+    border-top: 4px solid var(--color-accent);
+    /* Gold line as seen in image */
+}
+
+.footer-partners {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-lg) !important;
+    overflow: hidden;
+}
+
+.partners-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Strictly one row */
+    justify-content: center;
+    align-items: center;
+    gap: 4vw;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.footer-partners .partner-card {
+    flex: 0 1 auto;
+    filter: none;
+    opacity: 0.95;
+    transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.footer-partners .partner-card:hover {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.05);
+}
+
+.partner-logo {
+    max-width: clamp(45px, 12vw, 100px);
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .partners-grid {
+        gap: 3vw;
+        padding: 0 var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .partner-card {
+        flex: 0 0 calc(50% - var(--spacing-lg));
+    }
 }
