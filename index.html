@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فرقة عبدالرحمن بن القاسم الكشفية | Abdulrahman bin Al-Qasim Scout Group</title>
+    <meta name="description"
+        content="فرقة عبدالرحمن بن القاسم الكشفية - نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية" />
+    <meta name="author" content="Abdulrahman bin Al-Qasim Scout Group" />
+    <meta name="keywords" content="كشافة, فرقة كشفية, عبدالرحمن بن القاسم, scouts, Saudi Arabia" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="فرقة عبدالرحمن بن القاسم الكشفية" />
+    <meta property="og:description" content="نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية" />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" href="src/scout-team-logo.png" />
+</head>
+
+<body class="light-theme">
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <div class="splash-card-container">
+            <div class="splash-card">
+                <div class="splash-logo-container">
+                    <img src="src/ico.png" alt="Scout Logo" class="splash-logo">
+                </div>
+                <div class="splash-main-content">
+                    <h1 class="splash-title" data-ar="فرقة عبدالرحمن بن القاسم الكشفية"
+                        data-en="Abdulrahman bin Al-Qasim Scout Group">
+                        فرقة عبدالرحمن بن القاسم الكشفية
+                    </h1>
+                    <div class="splash-card-info">
+                        <p class="splash-description"
+                            data-ar="هذا الموقع التعريفي الرسمي لفرقتنا، يقدّم نبذة شاملة عن رؤيتنا، مسيرتنا، وإنجازاتنا على مستوى المملكة، ودورنا في إعداد قادة واعين يخدمون دينهم ووطنهم."
+                            data-en="This is the official introductory website for our troop, providing a comprehensive overview of our vision, journey, and achievements across the Kingdom, and our role in preparing conscious leaders who serve their religion and nation.">
+                            هذا الموقع التعريفي الرسمي لفرقتنا، يقدّم نبذة شاملة عن رؤيتنا، مسيرتنا، وإنجازاتنا على
+                            مستوى المملكة، ودورنا في إعداد قادة واعين يخدمون دينهم ووطنهم.
+                        </p>
+                    </div>
+                    <button id="closeSplash" class="btn btn-primary btn-lg splash-btn" data-ar="تعرف علينا"
+                        data-en="Know Us">تعرف علينا</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header with Mobile Navigation -->
+    <div class="container">
+        <div class="header-inner">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- Header Controls -->
+            <div class="header-controls">
+                <button class="share-btn-header" id="shareBtnTop" aria-label="Share" title="Share">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <div class="lang-divider"></div>
+                <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                    <span class="lang-icon"><i class="fa-solid fa-language"></i></span>
+                    <span class="lang-text" data-ar="EN" data-en="عربي">EN</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" id="mobileMenu" aria-label="Mobile navigation">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-list">
+            <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+            <li><a href="#camps" data-ar="المعسكرات والبرامج" data-en="Camps & Programs">المعسكرات والبرامج</a></li>
+            <li><a href="#achievements" data-ar="المشاركات والإنجازات" data-en="Achievements">المشاركات
+                    والإنجازات</a>
+            </li>
+            <li><a href="#organization" data-ar="التنظيم والاستضافة" data-en="Organization">التنظيم والاستضافة</a>
+            </li>
+            <li><a href="#community" data-ar="الخدمات المجتمعية" data-en="Community Services">الخدمات المجتمعية</a>
+            </li>
+            <li><a href="#support" data-ar="الدعم والتمكين" data-en="Support">الدعم والتمكين</a></li>
+            <li><a href="#about" data-ar="عن الفرقة" data-en="About">عن الفرقة</a></li>
+            <li><a href="#leader" data-ar="القائد" data-en="Leader">القائد</a></li>
+            <li><a href="#videos" data-ar="الفيديوهات" data-en="Videos">الفيديوهات</a></li>
+            <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+        </ul>
+    </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-video-background">
+            <video autoplay muted loop playsinline poster="src/image.png" preload="auto">
+                <source src="src/vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-emblem animate-on-scroll">
+                    <img src="src/scout-team-logo.png" alt="Scout Emblem" loading="eager">
+                </div>
+                <h1 class="hero-title animate-on-scroll" data-ar="فرقة عبدالرحمن بن القاسم الكشفية"
+                    data-en="Abdulrahman bin Al-Qasim Scout Group" style="transition-delay: 0.2s;">فرقة عبدالرحمن بن
+                    القاسم الكشفية</h1>
+                <p class="hero-subtitle animate-on-scroll"
+                    data-ar="نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية من خلال برامج كشفية متميزة"
+                    data-en="We aim to develop youth and promote values of leadership and community responsibility through outstanding scout programs"
+                    style="transition-delay: 0.4s;">
+                    نسعى لتطوير الشباب وتعزيز قيم القيادة والمسؤولية المجتمعية</p>
+                <div class="hero-buttons animate-on-scroll" style="transition-delay: 0.6s;">
+                    <a href="#camps" class="btn btn-primary" data-ar="استكشف المزيد" data-en="Explore More">استكشف
+                        المزيد</a>
+                    <a href="#contact" class="btn btn-secondary" data-ar="تواصل معنا" data-en="Contact Us">تواصل
+                        معنا</a>
+                </div>
+                <div class="hero-visitor-badge">
+                    <i class="fas fa-eye"></i>
+                    <span id="visitorsCountValue">0</span>
+                    <span class="v-label" data-ar="زوار" data-en="Visitors">زوار</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 2 L12 18 M6 12 L12 18 L18 12" fill="none" />
+            </svg>
+        </div>
+    </section>
+
+
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Camps & Programs Section - Static Content -->
+    <section id="camps" class="section achievements-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="المعسكرات والبرامج الكشفية" data-en="Camps & Programs">المعسكرات
+                    والبرامج الكشفية</h2>
+                <p class="section-subtitle" data-ar="برامجنا ومعسكراتنا الكشفية المتميزة"
+                    data-en="Our outstanding scout camps and programs">برامجنا ومعسكراتنا الكشفية المتميزة</p>
+            </div>
+            <div class="achievements-grid">
+                <!-- Camp 1 -->
+                <div class="achievement-card animate-on-scroll">
+                    <div class="achievement-year">2024</div>
+                    <div class="achievement-icon"><i class="fas fa-campground"></i></div>
+                    <h3 class="achievement-title" data-ar="معسكر التميّز الكشفي (1)"
+                        data-en="Scout Excellence Camp (1)">معسكر التميّز الكشفي (1)</h3>
+                    <p class="achievement-desc"
+                        data-ar="المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب"
+                        data-en="Participation in the internal Scout Excellence Camp held at the Student House">
+                        المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب</p>
+                </div>
+
+                <!-- Camp 2 -->
+                <div class="achievement-card animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="achievement-year">2024</div>
+                    <div class="achievement-icon"><i class="fas fa-campground"></i></div>
+                    <h3 class="achievement-title" data-ar="معسكر التميّز الكشفي (2)"
+                        data-en="Scout Excellence Camp (2)">معسكر التميّز الكشفي (2)</h3>
+                    <p class="achievement-desc"
+                        data-ar="المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب"
+                        data-en="Participation in the internal Scout Excellence Camp held at the Student House">
+                        المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب</p>
+                </div>
+
+                <!-- Camp 3 -->
+                <div class="achievement-card animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="achievement-year">2024</div>
+                    <div class="achievement-icon"><i class="fas fa-campground"></i></div>
+                    <h3 class="achievement-title" data-ar="معسكر التميّز الكشفي (3)"
+                        data-en="Scout Excellence Camp (3)">معسكر التميّز الكشفي (3)</h3>
+                    <p class="achievement-desc"
+                        data-ar="المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب"
+                        data-en="Participation in the internal Scout Excellence Camp held at the Student House">
+                        المشاركة في المعسكر الداخلي لمعسكر التميّز الكشفي المقام في بيت الطالب</p>
+                </div>
+
+                <!-- JOTA-JOTI -->
+                <div class="achievement-card animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="achievement-year">2024</div>
+                    <div class="achievement-icon"><i class="fas fa-satellite"></i></div>
+                    <h3 class="achievement-title" data-ar="المعسكر العالمي (جوتا – جوتي)"
+                        data-en="Global Camp (JOTA-JOTI)">المعسكر العالمي (جوتا – جوتي)</h3>
+                    <p class="achievement-desc" data-ar="المشاركة في المعسكر العالمي (جوتا – جوتي) عبر الأقمار الصناعية"
+                        data-en="Participation in the Global Camp (JOTA-JOTI) via satellite">
+                        المشاركة في المعسكر العالمي (جوتا – جوتي) عبر الأقمار الصناعية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Achievements & Participation Section - Static Content -->
+    <section id="achievements" class="section participation-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="المشاركات والإنجازات" data-en="Achievements & Participation">
+                    المشاركات والإنجازات</h2>
+                <p class="section-subtitle" data-ar="إنجازاتنا ومشاركاتنا المميزة"
+                    data-en="Our outstanding achievements">إنجازاتنا ومشاركاتنا المميزة</p>
+            </div>
+            <div class="participation-grid">
+                <!-- Achievement 1 -->
+                <div class="participation-card animate-on-scroll">
+                    <div class="card-icon"><i class="fas fa-crown"></i></div>
+                    <h3 class="card-title" data-ar="استقبال وتكريم أمير المنطقة الشرقية"
+                        data-en="Honoring by the Prince of the Eastern Region">استقبال وتكريم أمير المنطقة الشرقية
+                    </h3>
+                    <p class="card-desc"
+                        data-ar="استقبال أمير المنطقة الشرقية سعود بن نايف وتكريم قائد الفرقة الكشفية والفرقة الفائزة بالمركز الأول على مستوى المملكة."
+                        data-en="Reception by HRH Prince Saud bin Nayef and honoring the scout group leader and the first-place winning team at the Kingdom level.">
+                        استقبال أمير المنطقة الشرقية سعود بن نايف وتكريم قائد الفرقة الكشفية والفرقة الفائزة بالمركز
+                        الأول على مستوى المملكة.</p>
+                    <div class="card-stats" data-ar="إمارة المنطقة الشرقية" data-en="Eastern Region Emirate">إمارة
+                        المنطقة الشرقية</div>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                    <h3 class="card-title" data-ar="المركز الأول على مستوى المنطقة الشرقية"
+                        data-en="First Place at Eastern Region Level">المركز الأول على مستوى المنطقة الشرقية</h3>
+                    <p class="card-desc" data-ar="تحقيق المركز الأول على مستوى المنطقة الشرقية في التميز الكشفي"
+                        data-en="Achieved first place at the Eastern Region level in scout excellence">
+                        تحقيق المركز الأول على مستوى المنطقة الشرقية في التميز الكشفي</p>
+                    <div class="card-stats" data-ar="المنطقة الشرقية" data-en="Eastern Region">المنطقة الشرقية</div>
+                </div>
+
+                <!-- Achievement 3 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="card-icon"><i class="fas fa-medal"></i></div>
+                    <h3 class="card-title" data-ar="المركز الأول على مستوى المملكة"
+                        data-en="First Place at Kingdom Level">المركز الأول على مستوى المملكة</h3>
+                    <p class="card-desc"
+                        data-ar="تحقيق المركز الأول على مستوى المملكة في منافسات رسل السلام للتميّز الكشفي"
+                        data-en="Achieved first place at the Kingdom level in Peace Messengers Scout Excellence competitions">
+                        تحقيق المركز الأول على مستوى المملكة في منافسات رسل السلام للتميّز الكشفي</p>
+                    <div class="card-stats" data-ar="مستوى المملكة" data-en="Kingdom Level">مستوى المملكة</div>
+                </div>
+
+                <!-- Participation -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 class="card-title" data-ar="منافسات رسل السلام - الطائف"
+                        data-en="Peace Messengers Competitions - Taif">منافسات رسل السلام - الطائف</h3>
+                    <p class="card-desc" data-ar="المشاركة في منافسات رسل السلام للتميّز الكشفي بمحافظة الطائف"
+                        data-en="Participation in Peace Messengers Scout Excellence competitions in Taif">
+                        المشاركة في منافسات رسل السلام للتميّز الكشفي بمحافظة الطائف</p>
+                    <div class="card-stats" data-ar="محافظة الطائف" data-en="Taif Governorate">محافظة الطائف</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Organization & Hosting Section - Static Content -->
+    <section id="organization" class="section participation-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="التنظيم والاستضافة" data-en="Organization & Hosting">التنظيم
+                    والاستضافة</h2>
+                <p class="section-subtitle" data-ar="فعالياتنا التنظيمية والاستضافات"
+                    data-en="Our organizational events and hosting">فعالياتنا التنظيمية والاستضافات</p>
+            </div>
+            <div class="participation-grid">
+                <!-- Event 1 -->
+                <div class="participation-card animate-on-scroll">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="card-title" data-ar="استقبال مديرة التعليم"
+                        data-en="Receiving the Director of Education">استقبال مديرة التعليم</h3>
+                    <p class="card-desc"
+                        data-ar="استقبال مديرة التعليم في بيت الطالب، وافتتاح الدراسة الأولية، وتقديم ورشة عمل للقادة الكشفيين بالدراسة الأولية في المنطقة الشرقية"
+                        data-en="Receiving the Director of Education at the Student House, opening the preliminary study, and providing a workshop for scout leaders">
+                        استقبال مديرة التعليم في بيت الطالب، وافتتاح الدراسة الأولية، وتقديم ورشة عمل للقادة
+                        الكشفيين
+                    </p>
+                    <div class="card-stats" data-ar="بيت الطالب" data-en="Student House">بيت الطالب</div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3 class="card-title" data-ar="مهرجان ملتقى مرح" data-en="Marah Festival">مهرجان ملتقى مرح</h3>
+                    <p class="card-desc"
+                        data-ar="تنظيم مهرجان ملتقى مرح بالتعاون مع جمعية رقي للتنمية الاجتماعية الأهلية بالخبر"
+                        data-en="Organizing Marah Festival in cooperation with Ruqi Social Development Association in Khobar">
+                        تنظيم مهرجان ملتقى مرح بالتعاون مع جمعية رقي للتنمية الاجتماعية الأهلية بالخبر</p>
+                    <div class="card-stats" data-ar="الخبر" data-en="Khobar">الخبر</div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="card-icon"><i class="fas fa-running"></i></div>
+                    <h3 class="card-title" data-ar="سباق الجري الدولي" data-en="International Running Race">سباق
+                        الجري
+                        الدولي</h3>
+                    <p class="card-desc" data-ar="تنظيم سباق الجري الدولي بالتعاون مع الاتحاد السعودي"
+                        data-en="Organizing the international running race in cooperation with the Saudi Federation">
+                        تنظيم سباق الجري الدولي بالتعاون مع الاتحاد السعودي</p>
+                    <div class="card-stats" data-ar="الاتحاد السعودي" data-en="Saudi Federation">الاتحاد السعودي
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="card-icon"><i class="fas fa-futbol"></i></div>
+                    <h3 class="card-title" data-ar="حفل نادي الثقبة الرياضي" data-en="Al-Thuqbah Sports Club Ceremony">
+                        حفل نادي الثقبة الرياضي</h3>
+                    <p class="card-desc" data-ar="تنظيم حفل نادي الثقبة الرياضي"
+                        data-en="Organizing Al-Thuqbah Sports Club ceremony">
+                        تنظيم حفل نادي الثقبة الرياضي</p>
+                    <div class="card-stats" data-ar="نادي الثقبة" data-en="Al-Thuqbah Club">نادي الثقبة</div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.4s;">
+                    <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="card-title" data-ar="استضافة كشافة مدرسة جبل النور"
+                        data-en="Hosting Jabal Al-Nour School Scouts">استضافة كشافة مدرسة جبل النور</h3>
+                    <p class="card-desc"
+                        data-ar="استضافة كشافة مدرسة جبل النور بالخبر في المقر الكشفي بالمدرسة، وتقديم ورشة عمل متكاملة في الفنون الكشفية"
+                        data-en="Hosting Jabal Al-Nour School scouts in Khobar at the school scout headquarters, and providing a comprehensive workshop in scout arts">
+                        استضافة كشافة مدرسة جبل النور بالخبر في المقر الكشفي بالمدرسة، وتقديم ورشة عمل متكاملة في
+                        الفنون
+                        الكشفية</p>
+                    <div class="card-stats" data-ar="مدرسة جبل النور" data-en="Jabal Al-Nour School">مدرسة جبل النور
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Community Services Section - Static Content -->
+    <section id="community" class="section participation-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="الخدمات المجتمعية" data-en="Community Services">الخدمات المجتمعية
+                </h2>
+                <p class="section-subtitle" data-ar="خدماتنا ومساهماتنا في المجتمع"
+                    data-en="Our services and contributions to the community">خدماتنا ومساهماتنا في المجتمع</p>
+            </div>
+            <div class="participation-grid">
+                <!-- Service 1 -->
+                <div class="participation-card animate-on-scroll">
+                    <div class="card-icon"><i class="fas fa-kaaba"></i></div>
+                    <h3 class="card-title" data-ar="خدمة حجاج بيت الله 1445هـ" data-en="Serving Pilgrims 1445H">خدمة
+                        حجاج بيت الله 1445هـ</h3>
+                    <p class="card-desc" data-ar="المشاركة في خدمة حجاج بيت الله الحرام خلال موسم حج عام 1445هـ"
+                        data-en="Participation in serving pilgrims during the Hajj season of 1445H">
+                        المشاركة في خدمة حجاج بيت الله الحرام خلال موسم حج عام 1445هـ</p>
+                    <div class="card-stats" data-ar="موسم الحج 1445هـ" data-en="Hajj Season 1445H">موسم الحج 1445هـ
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="card-icon"><i class="fas fa-kaaba"></i></div>
+                    <h3 class="card-title" data-ar="خدمة حجاج بيت الله 1446هـ" data-en="Serving Pilgrims 1446H">خدمة
+                        حجاج بيت الله 1446هـ</h3>
+                    <p class="card-desc" data-ar="المشاركة في خدمة حجاج بيت الله الحرام خلال موسم حج عام 1446هـ"
+                        data-en="Participation in serving pilgrims during the Hajj season of 1446H">
+                        المشاركة في خدمة حجاج بيت الله الحرام خلال موسم حج عام 1446هـ</p>
+                    <div class="card-stats" data-ar="موسم الحج 1446هـ" data-en="Hajj Season 1446H">موسم الحج 1446هـ
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="card-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h3 class="card-title" data-ar="التعاون مع جمعية هداية"
+                        data-en="Cooperation with Hidaya Association">التعاون مع جمعية هداية</h3>
+                    <p class="card-desc"
+                        data-ar="التعاون مع جمعية هداية في تنفيذ برامج مجتمعية متعددة، من أبرزها توزيع المياه"
+                        data-en="Cooperation with Hidaya Association in implementing various community programs, most notably water distribution">
+                        التعاون مع جمعية هداية في تنفيذ برامج مجتمعية متعددة، من أبرزها توزيع المياه</p>
+                    <div class="card-stats" data-ar="جمعية هداية" data-en="Hidaya Association">جمعية هداية</div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3 class="card-title" data-ar="اليوم العالمي للتطوع 1446هـ"
+                        data-en="International Volunteer Day 1446H">اليوم العالمي للتطوع 1446هـ</h3>
+                    <p class="card-desc" data-ar="تنظيم حفل إدارة التعليم بمناسبة اليوم العالمي للتطوع لعام 1446هـ"
+                        data-en="Organizing the Education Department ceremony on the occasion of International Volunteer Day 1446H">
+                        تنظيم حفل إدارة التعليم بمناسبة اليوم العالمي للتطوع لعام 1446هـ</p>
+                    <div class="card-stats" data-ar="إدارة التعليم" data-en="Education Department">إدارة التعليم
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.4s;">
+                    <div class="card-icon"><i class="fas fa-landmark"></i></div>
+                    <h3 class="card-title" data-ar="منافسات الموروث الشعبي" data-en="Heritage Competitions">منافسات
+                        الموروث الشعبي</h3>
+                    <p class="card-desc"
+                        data-ar="تنظيم منافسات الموروث الشعبي بالتعاون مع إدارة التعليم، والمقامة في كورنيش الخبر لعام 1446هـ"
+                        data-en="Organizing heritage competitions in cooperation with the Education Department, held at Khobar Corniche in 1446H">
+                        تنظيم منافسات الموروث الشعبي بالتعاون مع إدارة التعليم، والمقامة في كورنيش الخبر لعام 1446هـ
+                    </p>
+                    <div class="card-stats" data-ar="كورنيش الخبر" data-en="Khobar Corniche">كورنيش الخبر</div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="participation-card animate-on-scroll" style="animation-delay: 0.5s;">
+                    <div class="card-icon"><i class="fas fa-fist-raised"></i></div>
+                    <h3 class="card-title" data-ar="منافسات التايكوندو" data-en="Taekwondo Competitions">منافسات
+                        التايكوندو</h3>
+                    <p class="card-desc"
+                        data-ar="تنظيم منافسات الاتحاد السعودي بالتعاون مع إدارة التعليم لرياضة التايكوندو، والمقامة في نادي الاتفاق لعام 1446هـ"
+                        data-en="Organizing Saudi Federation competitions in cooperation with the Education Department for Taekwondo, held at Al-Ittifaq Club in 1446H">
+                        تنظيم منافسات الاتحاد السعودي بالتعاون مع إدارة التعليم لرياضة التايكوندو، والمقامة في نادي
+                        الاتفاق لعام 1446هـ</p>
+                    <div class="card-stats" data-ar="نادي الاتفاق" data-en="Al-Ittifaq Club">نادي الاتفاق</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Support & Empowerment Section - Static Content -->
+    <section id="support" class="section participation-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="الدعم والتمكين" data-en="Support & Empowerment">الدعم والتمكين
+                </h2>
+                <p class="section-subtitle" data-ar="دعمنا لنشر الحركة الكشفية"
+                    data-en="Our support for spreading the scout movement">دعمنا لنشر الحركة الكشفية</p>
+            </div>
+            <div class="participation-grid">
+                <!-- Support 1 -->
+                <div class="participation-card animate-on-scroll">
+                    <div class="card-icon"><i class="fas fa-hands"></i></div>
+                    <h3 class="card-title" data-ar="افتتاح فرقة كشفية جديدة" data-en="Opening a New Scout Group">
+                        افتتاح
+                        فرقة كشفية جديدة</h3>
+                    <p class="card-desc"
+                        data-ar="مشاركة قائد الفرقة في تقديم الدعم وافتتاح فرقة كشفية جديدة في مدرسة السلام الأهلية بالخبر"
+                        data-en="Participation of the group leader in providing support and opening a new scout group at Al-Salam Private School in Khobar">
+                        مشاركة قائد الفرقة في تقديم الدعم وافتتاح فرقة كشفية جديدة في مدرسة السلام الأهلية بالخبر
+                    </p>
+                    <div class="card-stats" data-ar="مدرسة السلام الأهلية" data-en="Al-Salam Private School">مدرسة
+                        السلام الأهلية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="عن الفرقة" data-en="About">عن الفرقة</h2>
+                <p class="section-subtitle" data-ar="معلومات عن فرقتنا" data-en="Information about our group">
+                    معلومات عن
+                    فرقتنا</p>
+            </div>
+            <div class="about-bento">
+                <!-- Stats Row -->
+                <div class="bento-stats-row">
+                    <div class="bento-stat-card">
+                        <div class="stat-value" id="memberCountValue">24</div>
+                        <div class="stat-label" data-ar="الأعضاء" data-en="Members">الأعضاء</div>
+                    </div>
+                    <div class="bento-stat-card">
+                        <div class="stat-value" id="establishedYearValue">2022</div>
+                        <div class="stat-label" data-ar="تأسست" data-en="Established">تأسست</div>
+                    </div>
+                </div>
+                <!-- Content Cards Row -->
+                <div class="bento-content-row">
+                    <div class="bento-card mission-card">
+                        <div class="bento-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3 class="bento-title" data-ar="الرسالة" data-en="Mission">الرسالة</h3>
+                        <p class="bento-desc" id="missionText" data-mission
+                            data-ar="تطوير الشباب من خلال برامج كشفية متميزة وتعزيز قيم القيادة والمسؤولية المجتمعية"
+                            data-en="Developing youth through outstanding scout programs and promoting leadership values">
+                            تطوير الشباب من خلال برامج متميزة</p>
+                    </div>
+                    <div class="bento-card values-card">
+                        <div class="bento-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="bento-title" data-ar="القيم" data-en="Values">القيم</h3>
+                        <p class="bento-desc" id="valuesText" data-values
+                            data-ar="الشرف والأمانة والشجاعة والتعاون والعطاء والمسؤولية"
+                            data-en="Honor, integrity, courage, cooperation, and community responsibility">الشرف
+                            والأمانة والشجاعة والتعاون</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Leader Section -->
+    <section id="leader" class="section leader-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="القائد" data-en="Leader">القائد</h2>
+                <p class="section-subtitle" data-ar="قائد الفرقة الكشفي" data-en="Scout Group Leader">قائد الفرقة
+                    الكشفي
+                </p>
+            </div>
+            <div class="leader-grid">
+                <div class="leader-image">
+                    <div class="leader-avatar">
+                        <img src="src/scouts leader.jpg" alt="Scout Leader" loading="lazy">
+                    </div>
+                    <div class="leader-info">
+                        <h3 data-ar="القائد الكشفي" data-en="Scout Leader">عبدالرحمن الرميح</h3>
+                        <p data-ar="فرقة عبدالرحمن بن القاسم" data-en="Abdulrahman Group">فرقة عبدالرحمن بن القاسم
+                        </p>
+                    </div>
+                </div>
+                <div class="leader-bio-card">
+                    <div class="bio-content">
+                        <h4 class="bio-title" data-ar="نبذة عن القائد للفريق" data-en="About the Team Leader">نبذة
+                            عن
+                            القائد للفريق</h4>
+                        <p class="bio-text" id="leaderBio"
+                            data-ar="يُعدّ القائد الكشفي عبدالرحمن الرميح نموذجًا للقائد التربوي الذي يجمع بين الانضباط الكشفي، والوعي المجتمعي، والاهتمام ببناء الإنسان قبل النشاط. ولا يقتصر دوره على إدارة الفرق أو تنظيم البرامج، بل يمتد إلى غرس القيم، وتنمية الشخصية، وتعزيز روح المسؤولية والعمل الجماعي لدى أفراد فرقته. تنطلق قيادته من مبدأ التربية بالممارسة، حيث يؤمن بأن القيادة تقوم على القدوة والمشاركة، لا على التوجيه المباشر فقط. ويحرص على إشراك الكشافين في اتخاذ القرار، ومنحهم مسؤوليات تتناسب مع أعمارهم وقدراتهم، بما يسهم في بناء الثقة بالنفس وتنمية مهارات القيادة لديهم. وعلى المستوى التنظيمي، يتميز بأسلوب عمل يعتمد على التخطيط المسبق، وتنظيم الجهود، وربط الأنشطة الكشفية بأهداف تربوية واضحة، سواء في المعسكرات أو المشاركات المجتمعية أو البرامج التدريبية. ويؤمن بأن قيمة النشاط الكشفي لا تُقاس بعدد الفعاليات، بل بالأثر التربوي والسلوكي الذي يتركه في الأفراد. وفي مجال خدمة المجتمع، ينظر إلى الكشافة بوصفها طاقة تطوعية فاعلة تسهم في تعزيز الانتماء الوطني، وترسيخ القيم الإنسانية، وربط الكشاف ببيئته ومجتمعه المحلي، بما ينسجم مع رسالة الحركة الكشفية. وتتسم شخصيته القيادية بالهدوء والحزم، والاستماع قبل اتخاذ القرار، والتوجيه قبل المحاسبة، والتعامل مع الأخطاء باعتبارها فرصًا للتعلّم والتطوير. وقد أسهم هذا التوازن في كسب ثقة أفراد فرقته واحترامهم، وجعله قدوة تربوية قبل أن يكون قائدًا إداريًا. وبوجه عام، يمثّل القائد الكشفي عبدالرحمن الرميح نموذجًا للقيادة الواعية التي تؤمن بأن بناء الإنسان هو جوهر العمل الكشفي، وأن أثر القائد الحقيقي يظهر فيما يزرعه في نفوس من يعمل معهم."
+                            data-en="Scout Leader Abdulrahman Al-Rumaih is a model of an educational leader who combines scouting discipline, community awareness, and a focus on human development before activities. His role is not limited to managing teams or organizing programs; it extends to instilling values, developing personality, and fostering a sense of responsibility and teamwork among his group members. His leadership is based on the principle of education through practice, as he believes that leadership is rooted in role modeling and participation, not just direct instruction. He is dedicated to involving scouts in decision-making and assigning them responsibilities suited to their ages and abilities, helping build self-confidence and leadership skills. At the organizational level, he is known for a work style that relies on advance planning, effort coordination, and linking scouting activities to clear educational goals—whether in camps, community service, or training programs. He believes the value of scouting is measured not by the number of events, but by the educational and behavioral impact on individuals. In community service, he views scouting as a vital voluntary energy that strengthens national belonging, instills human values, and connects scouts with their environment and local community, aligning with the mission of the scouting movement. His leadership persona is characterized by calmness and firmness, listening before deciding, and prioritizing guidance over accountability. He treats mistakes as opportunities for learning and growth. This balanced approach has earned him the trust and respect of his group, making him an educational role model first and an administrative leader second. In summary, Scout Leader Abdulrahman Al-Rumaih represents a conscious leadership model that believes building the individual is the core of scouting, and that a true leader's impact is seen in the values they plant in others.">
+                            يُعدّ القائد الكشفي عبدالرحمن الرميح نموذجًا للقائد التربوي الذي يجمع بين الانضباط
+                            الكشفي،
+                            والوعي المجتمعي، والاهتمام ببناء الإنسان قبل النشاط. ولا يقتصر دوره على إدارة الفرق أو
+                            تنظيم
+                            البرامج، بل يمتد إلى غرس القيم، وتنمية الشخصية، وتعزيز روح المسؤولية والعمل الجماعي لدى
+                            أفراد فرقته.
+                            تنطلق قيادته من مبدأ التربية بالممارسة، حيث يؤمن بأن القيادة تقوم على القدوة والمشاركة،
+                            لا
+                            على التوجيه المباشر فقط. ويحرص على إشراك الكشافين في اتخاذ القرار، ومنحهم مسؤوليات
+                            تتناسب مع
+                            أعمارهم وقدراتهم، بما يسهم في بناء الثقة بالنفس وتنمية مهارات القيادة لديهم.
+                            وعلى المستوى التنظيمي، يتميز بأسلوب عمل يعتمد على التخطيط المسبق، وتنظيم الجهود، وربط
+                            الأنشطة الكشفية بأهداف تربوية واضحة، سواء في المعسكرات أو المشاركات المجتمعية أو البرامج
+                            التدريبية. ويؤمن بأن قيمة النشاط الكشفي لا تُقاس بعدد الفعاليات، بل بالأثر التربوي
+                            والسلوكي
+                            الذي يتركه في الأفراد.
+                            وفي مجال خدمة المجتمع، ينظر إلى الكشافة بوصفها طاقة تطوعية فاعلة تسهم في تعزيز الانتماء
+                            الوطني، وترسيخ القيم الإنسانية، وربط الكشاف ببيئته ومجتمعه المحلي، بما ينسجم مع رسالة
+                            الحركة
+                            الكشفية.
+                            وتتسم شخصيته القيادية بالهدوء والحزم، والاستماع قبل اتخاذ القرار، والتوجيه قبل المحاسبة،
+                            والتعامل مع الأخطاء باعتبارها فرصًا للتعلّم والتطوير. وقد أسهم هذا التوازن في كسب ثقة
+                            أفراد
+                            فرقته واحترامهم، وجعله قدوة تربوية قبل أن يكون قائدًا إداريًا.
+                            وبوجه عام، يمثّل القائد الكشفي عبدالرحمن الرميح نموذجًا للقيادة الواعية التي تؤمن بأن
+                            بناء
+                            الإنسان هو جوهر العمل الكشفي، وأن أثر القائد الحقيقي يظهر فيما يزرعه في نفوس من يعمل
+                            معهم.
+                        </p>
+                        <!-- Save Contact button moved to contact section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Videos Section - Static Content -->
+    <section id="videos" class="section videos-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="الفيديوهات" data-en="Videos">الفيديوهات</h2>
+                <p class="section-subtitle" data-ar="شاهد أنشطتنا" data-en="Watch our activities">شاهد أنشطتنا</p>
+            </div>
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail"
+                        style="background-image: url('https://img.youtube.com/vi/r9g4Yflv6dI/maxresdefault.jpg')">
+                        <a href="https://www.youtube.com/watch?v=r9g4Yflv6dI" target="_blank" rel="noopener noreferrer"
+                            class="play-btn" aria-label="تشغيل الفيديو">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                    <h3 class="video-title" data-ar="حفل صنّاع الأثر مع نادي الثقبة"
+                        data-en="Impact Makers Ceremony with Al-Thuqbah Club">
+                        حفل صنّاع الأثر مع نادي الثقبة</h3>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="video-thumbnail"
+                        style="background-image: url('https://img.youtube.com/vi/tN7-oPaCR3w/maxresdefault.jpg')">
+                        <a href="https://www.youtube.com/watch?v=tN7-oPaCR3w" target="_blank" rel="noopener noreferrer"
+                            class="play-btn" aria-label="تشغيل الفيديو">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                    <h3 class="video-title" data-ar="سباق الشرقية الدولي" data-en="Eastern Province International Race">
+                        سباق الشرقية الدولي</h3>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="video-thumbnail"
+                        style="background-image: url('https://img.youtube.com/vi/BxJCHSFnbOA/maxresdefault.jpg')">
+                        <a href="https://www.youtube.com/watch?v=BxJCHSFnbOA" target="_blank" rel="noopener noreferrer"
+                            class="play-btn" aria-label="تشغيل الفيديو">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                    <h3 class="video-title" data-ar="برنامج ملتقان مرح مع جمعية رقي"
+                        data-en="Marah Program with Ruqi Association">
+                        برنامج ملتقان مرح مع جمعية رقي</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Visit Our Website Section -->
+    <section id="visit" class="section visit-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="زوروا موقعنا الآن" data-en="Visit Our Website Now">زوروا موقعنا
+                    الآن
+                </h2>
+                <p class="section-subtitle" data-ar="اكتشفوا تجربتنا الرقمية المميزة"
+                    data-en="Discover our premium digital experience">اكتشفوا تجربتنا الرقمية المميزة</p>
+            </div>
+            <div class="visit-content">
+                <div class="image-container">
+                    <img src="src/Screenshot.png" alt="Website Screenshot" class="website-screenshot">
+                </div>
+                <div class="visit-description">
+                    <h3 class="journey-title" data-ar="ابدأ رحلتك الكشفية اليوم"
+                        data-en="Start Your Scout Journey Today">ابدأ رحلتك الكشفية اليوم</h3>
+                    <p class="journey-subtitle" data-ar="انضم لفريق الكشافة وكن جزءاً من عائلة تصنع قادة المستقبل"
+                        data-en="Join the scout team and become part of a family that shapes future leaders">انضم
+                        لفريق
+                        الكشافة وكن جزءاً من عائلة تصنع قادة المستقبل</p>
+                    <a href="https://scout-abdulrahman-bin-al-qasim.lovable.app/" class="btn btn-primary"
+                        data-ar="ابدأ الآن" data-en="Get Started">
+                        <span class="btn-text">ابدأ الآن</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h2>
+                <p class="section-subtitle" data-ar="نحن هنا لسماع آرائك" data-en="We're here to hear from you">نحن
+                    هنا
+                    لسماع آرائك</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                        <div>
+                            <p class="contact-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني
+                            </p>
+                            <a href="mailto:scouts.th.abdrahman.bin.qasim@gmail.com" id="contactEmail"
+                                data-contact="email">scouts.th.abdrahman.bin.qasim@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                        <div>
+                            <p class="contact-label" data-ar="الهاتف" data-en="Phone">الهاتف</p>
+                            <a href="tel:+966563055595" id="contactPhone" data-contact="phone">0563055595</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <div>
+                            <p class="contact-label" data-ar="الموقع" data-en="Address">الموقع</p>
+                            <p id="contactAddress" data-contact="address"
+                                data-ar="المملكة العربية السعودية - المنطقة الشرقية - الخبر"
+                                data-en="Saudi Arabia - Eastern Region - Khobar">المملكة العربية السعودية - المنطقة
+                                الشرقية - الخبر</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map animate-on-scroll">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.4213155425787!2d50.1948192!3d26.2804385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e811ca7abe93%3A0x70a81686a048c4a5!2z2YXYr9ix2LPYqSDYudio2K_Yp9mE2LHYrdmF2YYg2KjZhiDZgtin2LPZhSDYp9mE2KvYp9mG2YjZitip2Iwg2KfZhNi02KfYsdi5INin2YTYrdin2K_ZiiDYudi02LHYjCDYp9mE2KvZgtio2KnYjCDYp9mE2KvZgtio2KnYjCDYp9mE2K7YqNixIDM0NjIz!5e0!3m2!1sar!2ssa!4v1769013981799!5m2!1sar!2ssa"
+                        width="100%" height="350"
+                        style="border:0; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 25px;"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+
+                    <div class="contact-extra-info desktop-only">
+                        <div class="extra-info-card">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4 data-ar="أوقات العمل والتواصل" data-en="Working Hours">أوقات العمل والتواصل</h4>
+                                <p data-ar="من الأحد إلى الخميس: 7:00 صباحاً - 1:00 ظهراً"
+                                    data-en="Sun - Thu: 7:00 AM - 1:00 PM">من الأحد إلى الخميس: 7:00 صباحاً - 1:00 ظهراً
+                                </p>
+                            </div>
+                        </div>
+                        <div class="extra-info-card">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h4 data-ar="ملاحظة للزوار" data-en="Visitor Note">ملاحظة للزوار</h4>
+                                <p data-ar="نرحب باستفساراتكم في أي وقت عبر البريد الإلكتروني أو الواتساب."
+                                    data-en="We welcome your inquiries anytime via Email or WhatsApp.">نرحب باستفساراتكم
+                                    في أي وقت عبر البريد الإلكتروني أو الواتساب.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm" method="POST"
+                    action="https://formsubmit.co/scouts.th.abdrahman.bin.qasim@gmail.com">
+                    <!-- FormSubmit Configuration -->
+                    <input type="hidden" name="_subject" value="رسالة جديدة من موقع فرقة عبدالرحمن بن القاسم">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <input type="text" id="formName" name="name" data-ar="الاسم" data-en="Name"
+                            placeholder="الاسم / Name" required aria-required="true">
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="formEmail" name="email" data-ar="البريد الإلكتروني" data-en="Email"
+                            placeholder="البريد الإلكتروني / Email" required aria-required="true">
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="formMessage" name="message" data-ar="الرسالة" data-en="Message"
+                            placeholder="الرسالة / Message" rows="5" required aria-required="true"></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn-full" id="submitBtn" data-ar="إرسال"
+                        data-en="Send">
+                        <span class="btn-text">إرسال</span>
+                        <span class="btn-loading hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+
+                    <div class="direct-contact-buttons">
+                        <div class="direct-buttons-row">
+                            <a href="tel:+966563055595" class="direct-btn call-btn">
+                                <i class="fas fa-phone-alt"></i>
+                                <span data-ar="اتصال مباشر" data-en="Direct Call">اتصال مباشر</span>
+                            </a>
+                            <button type="button" id="saveContactBtn" class="direct-btn vcard-btn-direct">
+                                <i class="fas fa-user-plus"></i>
+                                <span data-ar="حفظ الاتصال" data-en="Save Contact">حفظ الاتصال</span>
+                            </button>
+                        </div>
+                        <a href="https://wa.me/966563055595" class="direct-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span data-ar="واتساب" data-en="WhatsApp">واتساب</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="partners-grid footer-partners">
+                <div class="partner-card">
+                    <img src="src/roqy.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="src/thuqbah.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="src/WOSM.svg.png" alt="Partner Logo" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="src/SA-scouts.png" alt="Partner Logo" class="partner-logo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Scripts - Load utils first -->
+    <script src="script.js"></script>
+</body>
+
+</html>
